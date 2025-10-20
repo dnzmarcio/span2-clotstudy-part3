@@ -1,0 +1,146 @@
+---
+title: "SPAN 2 Stage 4 - Compliance"
+author: "Marcio Diniz, Karni Bedirian, Shu-Hsiang Wang"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  html:
+    toc: true
+    toc-depth: 5
+    toc-location: left
+    column: page-right
+    self-contained: true
+    echo: true
+    code-fold: true
+    warning: false
+    message: false
+---
+
+```{r}
+source("00_utils.R") 
+load("results/span2_clotstudy_p3_compliance_analysis.Rdata")
+```
+
+
+# mITT
+
+## Tables 
+
+::: {.panel-tabset}
+### Overall
+
+
+```{r}
+tab <- tables$comp_mitt$overall 
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+
+### Sex
+```{r}
+tab <- tables$comp_mitt$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+
+### Site
+```{r}
+tab <- tables$comp_mitt$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+
+```
+
+
+### Treatment 
+```{r}
+tab <- tables$comp_mitt$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+
+```
+
+### Clot Length
+```{r}
+tab <- tables$comp_mitt$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+:::
+
+
+# Per Protocol Population
+
+## Tables 
+
+::: {.panel-tabset}
+### Overall
+
+
+```{r}
+tab <- tables$comp_pp$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Per Protocol Population"
+  ) 
+```
+
+### Sex
+```{r}
+tab <- tables$comp_pp$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Per Protocol Population"
+  ) 
+```
+
+### Site
+```{r}
+tab <- tables$comp_pp$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Per Protocol Population"
+  ) 
+
+```
+
+### Treatment 
+```{r}
+tab <- tables$comp_pp$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Per Protocol Population"
+  ) 
+
+```
+
+### Animal Model
+```{r}
+tab <- tables$comp_pp$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Per Protocol Population"
+  ) 
+```
+:::
+
+

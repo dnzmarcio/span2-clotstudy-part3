@@ -1,0 +1,908 @@
+---
+title: "SPAN 2 Clot Study - Day 7 Corner Test"
+subtitle: "PP Population"
+author: "Marcio Diniz, Karni Bedirian"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  html:
+    toc: true
+    toc-depth: 5
+    toc-location: left
+    column: page-right
+    self-contained: true
+    echo: true
+    code-fold: true
+    warning: false
+    message: false
+---
+
+```{r}
+source("00_utils.R") 
+load("results/span2_clotstudy_p3_d7_corner_test_analysis_pp.Rdata")
+```
+
+
+# Feasibility
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$feasibility$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Corner Test - Feasibility"
+  ) 
+```
+
+
+## Site
+```{r}
+tab <- tables$feasibility$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Corner Test - Feasibility"
+  ) 
+
+```
+
+## Sex
+```{r}
+tab <- tables$feasibility$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Corner Test - Feasibility"
+  ) 
+```
+
+## Treatment
+```{r}
+tab <- tables$feasibility$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Corner Test - Feasibility"
+  ) 
+```
+
+## Clot length
+```{r}
+tab <- tables$feasibility$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Corner Test - Feasibility"
+  ) 
+```
+
+:::
+
+
+# Outcomes
+
+## Definitions
+
+**Alternative Corner Test Index** = $\displaystyle\frac{\mbox{Abs(Left Turns - Right Turns)}}{\mbox{Left Turns + Right Turns}}$
+
+## Tables
+
+::: {.panel-tabset}
+
+### Overall
+
+```{r}
+tab <- tables$outcome$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index"
+  ) 
+```
+
+### Treatment
+
+```{r}
+tab <- tables$outcome$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment"
+  ) 
+```
+
+### Sex
+
+::: {.panel-tabset}
+
+#### Female
+```{r}
+tab <- tables$outcome$sex$f
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Sex: Female"
+  ) 
+```
+
+#### Male
+```{r}
+tab <- tables$outcome$sex$m
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Sex: Male"
+  ) 
+```
+:::
+
+### Site
+
+::: {.panel-tabset}
+
+#### AG
+```{r}
+tab <- tables$outcome$site$ag
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Site: AG"
+  ) 
+```
+
+#### DK
+```{r}
+tab <- tables$outcome$site$dk
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Site: DK"
+  ) 
+```
+
+#### IW
+```{r}
+tab <- tables$outcome$site$iw
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Site: IW"
+  ) 
+```
+
+#### MG
+```{r}
+tab <- tables$outcome$site$mg
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Site: MG"
+  ) 
+```
+
+#### SD
+```{r}
+tab <- tables$outcome$site$sd
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Site: SD"
+  ) 
+```
+
+#### YL
+```{r}
+tab <- tables$outcome$site$yl
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Site: YL"
+  ) 
+```
+
+:::
+
+### Clot Length
+
+::: {.panel-tabset}
+
+#### 3cm
+```{r}
+tab <- tables$outcome$clot_length$cl3
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Clot Length: 3cm"
+  ) 
+```
+
+#### 4cm
+```{r}
+tab <- tables$outcome$clot_length$cl4
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Alternative Corner Test Index by treatment",
+    subtitle = "Clot Length: 4cm"
+  ) 
+```
+:::
+
+
+:::
+
+
+## Plots
+
+::: {.panel-tabset}
+
+### Treatment
+
+::: {.panel-tabset}
+
+#### Baseline
+```{r}
+plots$outcome$overall$txas_reperfusion$d0
+```
+
+#### Day 7
+```{r}
+plots$outcome$overall$txas_reperfusion$d7
+```
+
+#### Day 30
+```{r}
+plots$outcome$overall$txas_reperfusion$d30
+```
+
+:::
+
+### Site
+
+::: {.panel-tabset}
+
+#### Baseline
+```{r, fig.width=12, fig.height=8}
+plots$outcome$overall$site$d0
+```
+
+#### Day 7
+```{r, fig.width=12, fig.height=8}
+plots$outcome$overall$site$d7
+```
+
+#### Day 30
+```{r, fig.width=12, fig.height=8}
+plots$outcome$overall$site$d30
+```
+
+:::
+
+### Sex
+
+::: {.panel-tabset}
+
+#### Baseline
+```{r, fig.width=8, fig.height=4}
+plots$outcome$overall$sex$d0
+```
+
+#### Day 7
+```{r, fig.width=8, fig.height=4}
+plots$outcome$overall$sex$d7
+```
+
+#### Day 30
+```{r, fig.width=8, fig.height=4}
+plots$outcome$overall$sex$d30
+```
+
+:::
+
+
+### Clot Length
+
+::: {.panel-tabset}
+
+#### Baseline
+```{r, fig.width=8, fig.height=4}
+plots$outcome$overall$clot_length$d0
+```
+
+#### Day 7
+```{r, fig.width=8, fig.height=4}
+plots$outcome$overall$clot_length$d7
+```
+
+#### Day 30
+```{r, fig.width=8, fig.height=4}
+plots$outcome$overall$clot_length$d30
+```
+
+:::
+
+:::
+
+## Test of Hypotheses 
+
+`r interpretation$model`
+
+`r interpretation$treat`
+
+`r interpretation$imp`
+
+::: {.panel-tabset}
+
+### No missing data imputation
+
+::: {.panel-tabset}
+
+#### Interaction
+
+```{r}
+plots$pim$noimputation$interaction
+```
+
+
+#### Overall
+
+```{r}
+tab <- tables$pim$noimputation$overall$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$noimputation$overall
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$noimputation$overall$full_output
+gt(tab) 
+```
+
+#### CL3
+
+```{r}
+tab <- tables$pim$noimputation$cl3$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$noimputation$cl3
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$noimputation$cl3$full_output
+gt(tab) 
+```
+
+#### CL4
+
+```{r}
+tab <- tables$pim$noimputation$cl4$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$noimputation$cl4
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$noimputation$cl4$full_output
+gt(tab) 
+```
+
+:::
+
+### Missing data imputation - Worst Score Overall
+
+::: {.panel-tabset}
+
+#### Interaction
+
+```{r}
+plots$pim$imputation_ws_overall$interaction
+```
+
+
+#### Overall
+
+```{r}
+tab <- tables$pim$imputation_ws_overall$overall$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_overall$overall
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_overall$overall$full_output
+gt(tab) 
+```
+
+#### CL3
+
+```{r}
+tab <- tables$pim$imputation_ws_overall$cl3$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_overall$cl3
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_overall$cl3$full_output
+gt(tab) 
+```
+
+#### CL4
+
+```{r}
+tab <- tables$pim$imputation_ws_overall$cl4$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_overall$cl4
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_overall$cl4$full_output
+gt(tab) 
+```
+
+:::
+
+### Missing data imputation - Worst Score CLS
+
+::: {.panel-tabset}
+
+#### Interaction
+
+```{r}
+plots$pim$imputation_ws_cls$interaction
+```
+
+
+#### Overall
+
+```{r}
+tab <- tables$pim$imputation_ws_cls$overall$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_cls$overall
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_cls$overall$full_output
+gt(tab) 
+```
+
+#### CL3
+
+```{r}
+tab <- tables$pim$imputation_ws_cls$cl3$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_cls$cl3
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_cls$cl3$full_output
+gt(tab) 
+```
+
+#### CL4
+
+```{r}
+tab <- tables$pim$imputation_ws_cls$cl4$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_cls$cl4
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_cls$cl4$full_output
+gt(tab) 
+```
+
+:::
+
+### Missing data imputation - Worst Score CLST
+
+::: {.panel-tabset}
+
+#### Interaction
+
+```{r}
+plots$pim$imputation_ws_clst$interaction
+```
+
+
+#### Overall
+
+```{r}
+tab <- tables$pim$imputation_ws_clst$overall$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_clst$overall
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_clst$overall$full_output
+gt(tab) 
+```
+
+#### CL3
+
+```{r}
+tab <- tables$pim$imputation_ws_clst$cl3$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_clst$cl3
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_clst$cl3$full_output
+gt(tab) 
+```
+
+#### CL4
+
+```{r}
+tab <- tables$pim$imputation_ws_clst$cl4$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_ws_clst$cl4
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_ws_clst$cl4$full_output
+gt(tab) 
+```
+
+:::
+
+### Missing data imputation - Multiple Imputation
+
+::: {.panel-tabset}
+
+#### Interaction
+
+```{r}
+plots$pim$imputation_mi$interaction
+```
+
+
+#### Overall
+
+```{r}
+tab <- tables$pim$imputation_mi$overall$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_mi$overall
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_mi$overall$full_output
+gt(tab) 
+```
+
+#### CL3
+
+```{r}
+tab <- tables$pim$imputation_mi$cl3$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_mi$cl3
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_mi$cl3$full_output
+gt(tab) 
+```
+
+#### CL4
+
+```{r}
+tab <- tables$pim$imputation_mi$cl4$txas_reperfusion 
+gt(tab) |> 
+  tab_header(
+    title = "Relative Effect - Probabilistic Index Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "PI (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pi
+  )
+```
+
+##### Plot
+```{r}
+plots$pim$imputation_mi$cl4
+```
+
+##### Full Output
+
+```{r}
+tab <- tables$pim$imputation_mi$cl4$full_output
+gt(tab) 
+```
+
+:::
+
+:::

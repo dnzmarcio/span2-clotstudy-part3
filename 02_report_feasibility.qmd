@@ -1,0 +1,551 @@
+---
+title: "SPAN 2 Clot Study - Feasibility"
+author: "Marcio Diniz, Karni Bedirian, Shu-Hsiang Wang"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  html:
+    toc: true
+    toc-depth: 5
+    toc-location: left
+    column: page-right
+    self-contained: true
+    echo: true
+    code-fold: true
+    warning: false
+    message: false
+---
+
+```{r}
+source("00_utils.R") 
+load("results/span2_clotstudy_p3_feasibility_descriptive_analysis.Rdata")
+```
+
+
+# Enrolled
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$enrolled$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Enrolled Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$enrolled$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Enrolled Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$enrolled$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Enrolled Population"
+  ) 
+
+```
+
+
+:::
+
+# Ineligible for Randomization
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$ineligible_for_randomization$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Ineligible for Randomization Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$ineligible_for_randomization$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Ineligible for Randomization Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$ineligible_for_randomization$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Ineligible for Randomization Population"
+  ) 
+
+```
+
+:::
+
+
+# ITT
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$itt$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - ITT Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$itt$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - ITT Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$itt$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - ITT Population"
+  ) 
+```
+
+## Treatment
+```{r}
+tab <- tables$itt$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - ITT Population"
+  ) 
+```
+
+## Clot Length
+```{r}
+tab <- tables$itt$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - ITT Population"
+  ) 
+```
+
+:::
+
+<!-- # Exclusion from Treatment -->
+
+<!-- ::: {.panel-tabset} -->
+<!-- ## Overall -->
+
+
+<!-- ```{r} -->
+<!-- tab <- tables$exclusion_from_treatment$overall -->
+
+<!-- nt_format(tab) |> -->
+<!--   tab_header( -->
+<!--     title = "Descriptive Analysis - Exclusion from Treatment Population" -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## Sex -->
+<!-- ```{r} -->
+<!-- tab <- tables$exclusion_from_treatment$sex -->
+
+<!-- nt_format(tab) |> -->
+<!--   tab_header( -->
+<!--     title = "Descriptive Analysis - Exclusion from Treatment Population" -->
+<!--   ) -->
+<!-- ``` -->
+
+<!-- ## Site -->
+<!-- ```{r} -->
+<!-- tab <- tables$exclusion_from_treatment$site -->
+
+<!-- nt_format(tab) |> -->
+<!--   tab_header( -->
+<!--     title = "Descriptive Analysis - Exclusion from Treatment Population" -->
+<!--   ) -->
+
+<!-- ``` -->
+
+<!-- ## Treatment -->
+<!-- ```{r} -->
+<!-- tab <- tables$exclusion_from_treatment$txas_tx_group -->
+
+<!-- nt_format(tab) |> -->
+<!--   tab_header( -->
+<!--     title = "Descriptive Analysis - Exclusion from Treatment Population" -->
+<!--   ) -->
+<!-- ``` -->
+
+
+<!-- ::: -->
+
+# Procedural Dropout
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$procedural_dropout$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Procedural Dropout Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$procedural_dropout$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Procedural Dropout Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$procedural_dropout$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Procedural Dropout Population"
+  )
+
+```
+
+## Treatment
+```{r}
+tab <- tables$procedural_dropout$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Procedural Dropout Population"
+  ) 
+```
+
+## Clot Length
+```{r}
+tab <- tables$procedural_dropout$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Procedural Dropout Population"
+  ) 
+```
+:::
+
+
+# mITT
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$mitt$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$mitt$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$mitt$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+
+## Treatment
+
+```{r}
+tab <- tables$mitt$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+
+
+## Clot Length
+```{r}
+tab <- tables$mitt$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - mITT Population"
+  ) 
+```
+:::
+
+
+# Partial Treatment
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$partial_treatment$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Partial Treatment Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$partial_treatment$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Partial Treatment Population") 
+```
+
+## Site
+```{r}
+tab <- tables$partial_treatment$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Partial Treatment Population"
+  ) 
+```
+
+## Treatment
+```{r}
+tab <- tables$partial_treatment$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Partial Treatment Population") 
+```
+
+## Clot Length
+```{r}
+tab <- tables$partial_treatment$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Partial Treatment Population"
+  ) 
+```
+
+:::
+
+
+# Per Protocol
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$pp$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Fully Treated Population")
+```
+
+## Sex
+```{r}
+tab <- tables$pp$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Fully Treated Population"
+  )
+```
+
+## Site
+```{r}
+tab <- tables$pp$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Fully Treated Population"
+  )
+
+```
+
+## Treatment
+
+```{r}
+tab <- tables$pp$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Fully Treated Population"
+  ) 
+```
+
+
+## Clot Length
+```{r}
+tab <- tables$pp$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Fully Treated Population"
+  ) 
+```
+
+:::
+
+
+# Loss to follow-up
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$loss_followup$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Loss to follow-up Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$loss_followup$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Loss to follow-up Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$loss_followup$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Loss to follow-up Population"
+  ) 
+```
+
+## Treatment
+```{r}
+tab <- tables$loss_followup$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Loss to follow-up Population"
+  ) 
+```
+
+## Clot Length
+```{r}
+tab <- tables$loss_followup$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Loss to follow-up Population"
+  ) 
+```
+:::
+
+# Full Data Population
+
+::: {.panel-tabset}
+## Overall
+
+
+```{r}
+tab <- tables$full_data$overall
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Full Data Population"
+  ) 
+```
+
+## Sex
+```{r}
+tab <- tables$full_data$sex
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Full Data Population"
+  ) 
+```
+
+## Site
+```{r}
+tab <- tables$full_data$site
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Full Data Population"
+  ) 
+```
+
+## Treatment
+```{r}
+tab <- tables$full_data$txas_reperfusion
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Full Data Population"
+  ) 
+```
+
+## Clot Length
+```{r}
+tab <- tables$full_data$clot_length
+
+nt_format(tab) |>
+  tab_header(
+    title = "Descriptive Analysis - Full Data Population"
+  ) 
+```
+:::

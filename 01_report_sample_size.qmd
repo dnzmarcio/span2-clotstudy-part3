@@ -1,0 +1,54 @@
+---
+title: "SPAN 2 Clot Study - Sample Size"
+author: "Marcio Diniz"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  html:
+    toc: true
+    toc-depth: 5
+    toc-location: left
+    column: page-right
+    self-contained: true
+    echo: true
+    code-fold: true
+    warning: false
+    message: false
+---
+
+```{r}
+source("00_utils.R") 
+load("data/span2_clotstudy_p3_feasibility_data.Rdata")
+```
+
+# Sample Size 
+
+```{r}
+n <- c(nrow(dt_feasibility$enrolled), 
+       nrow(dt_feasibility$ineligible_for_randomization),
+       nrow(dt_feasibility$itt),
+       nrow(dt_feasibility$exclusion_from_treatment),
+       nrow(dt_feasibility$procedural_dropout),
+       nrow(dt_feasibility$mitt),
+       nrow(dt_feasibility$partial_treatment),
+       nrow(dt_feasibility$pp),
+       nrow(dt_feasibility$loss_followup),
+       nrow(dt_feasibility$full_data))
+
+population <- c("Enrolled", 
+                "Ineligible for Randomization",
+                "ITT",
+                "Exclusion from Treatment",
+                "Procedural Dropout",
+                "mITT",
+                "Partial Treatment",
+                "Per Protocol",
+                "Loss to follow-up",
+                "Full Data")
+
+tab <- tibble(Population = population,
+                  'Sample Size' = n)
+
+
+gt(tab) 
+```
+
