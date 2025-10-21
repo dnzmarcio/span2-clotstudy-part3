@@ -141,18 +141,18 @@ source("09_mri_d2_dataset.R")
 
 #### Volume Fraction Tissue - Right Hemisphere ----
 
-###### mITT analysis ----
-
-source("12_d2_volume_tissue_right_analysis_mitt.R")
-quarto_render(input = "report_d2_volume_tissue_right_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_volume_tissue_right_analysis_mitt ",
-                                   Sys.Date(), ".html"))
-###### PP analysis ----
-
-source("12_d2_volume_tissue_right_analysis_ft.R")
-quarto_render(input = "report_d2_volume_tissue_right_analysis_pp.qmd",
-              output_file = paste0("reports/report_d2_volume_tissue_right_analysis_pp ",
-                                   Sys.Date(), ".html"))
+# ###### mITT analysis ----
+# 
+# source("12_d2_volume_tissue_right_analysis_mitt.R")
+# quarto_render(input = "report_d2_volume_tissue_right_analysis_mitt.qmd",
+#               output_file = paste0("reports/report_d2_volume_tissue_right_analysis_mitt ",
+#                                    Sys.Date(), ".html"))
+# ###### PP analysis ----
+# 
+# source("12_d2_volume_tissue_right_analysis_ft.R")
+# quarto_render(input = "report_d2_volume_tissue_right_analysis_pp.qmd",
+#               output_file = paste0("reports/report_d2_volume_tissue_right_analysis_pp ",
+#                                    Sys.Date(), ".html"))
 
 #### Volume Fraction Lesion - Left Hemisphere ----
 
@@ -173,30 +173,30 @@ quarto_render(input = "report_d2_volume_tissue_right_analysis_pp.qmd",
 
 ###### mITT analysis ----
 
-source("14_d2_volume_lesion_right_analysis_mitt.R")
-quarto_render(input = "report_d2_volume_lesion_right_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_volume_lesion_right_analysis_mitt ",
+source("15_d2_volume_lesion_right_analysis_mitt.R")
+quarto_render(input = "15_report_d2_volume_lesion_right_analysis_mitt.qmd",
+              output_file = paste0("report_d2_volume_lesion_right_analysis_mitt ",
                                    Sys.Date(), ".html"))
 ###### PP analysis ----
 
-source("14_d2_volume_lesion_right_analysis_ft.R")
-quarto_render(input = "report_d2_volume_lesion_right_analysis_pp.qmd",
-              output_file = paste0("reports/report_d2_volume_lesion_right_analysis_pp ",
+source("15_d2_volume_lesion_right_analysis_pp.R")
+quarto_render(input = "15_report_d2_volume_lesion_right_analysis_pp.qmd",
+              output_file = paste0("report_d2_volume_lesion_right_analysis_pp ",
                                    Sys.Date(), ".html"))
 
 #### Midline Shift Index ----
 
 ###### mITT analysis ----
 
-source("15_d2_mid_shift_indx_analysis_mitt.R")
-quarto_render(input = "report_d2_mid_shift_indx_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_mid_shift_indx_analysis_mitt ",
+source("16_d2_mid_shift_indx_analysis_mitt.R")
+quarto_render(input = "16_report_d2_mid_shift_indx_analysis_mitt.qmd",
+              output_file = paste0("report_d2_mid_shift_indx_analysis_mitt ",
                                    Sys.Date(), ".html"))
 ###### PP analysis ----
 
-source("15_d2_mid_shift_indx_analysis_pp.R")
-quarto_render(input = "report_d2_mid_shift_indx_analysis_pp.qmd",
-              output_file = paste0("reports/report_d2_mid_shift_indx_analysis_pp ",
+source("16_d2_mid_shift_indx_analysis_pp.R")
+quarto_render(input = "16_report_d2_mid_shift_indx_analysis_pp.qmd",
+              output_file = paste0("report_d2_mid_shift_indx_analysis_pp ",
                                    Sys.Date(), ".html"))
 
 ### Simple SPAN Score ----
