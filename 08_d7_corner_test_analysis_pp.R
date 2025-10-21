@@ -400,7 +400,7 @@ tables$pim$noimputation$interaction <-
   pim_results$noimputation$interaction$pvalue[nrow(tmp)]
 
 plots$pim$noimputation$interaction <- 
-  plot_clotlength_interaction(dm, y = alternative_corner_index_d7,
+  plot_clotlength_interaction(dt, y = alternative_corner_index_d7,
                               ylabel = ylabel, 
                               pvalue = tables$pim$noimputation$interaction)
 
@@ -520,7 +520,7 @@ tables$pim$imputation_ws_overall$interaction <-
   pim_results$imputation_ws_overall$interaction$pvalue[nrow(tmp)]
 
 plots$pim$imputation_ws_overall$interaction <- 
-  plot_clotlength_interaction(dm, y = alternative_corner_index_d7,
+  plot_clotlength_interaction(dt, y = alternative_corner_index_d7,
                               ylabel = ylabel, 
                               pvalue = 
                                 tables$pim$imputation_ws_overall$interaction)
@@ -643,7 +643,7 @@ tables$pim$imputation_ws_cls$interaction <-
   pim_results$imputation_ws_cls$interaction$pvalue[nrow(tmp)]
 
 plots$pim$imputation_ws_cls$interaction <- 
-  plot_clotlength_interaction(dm, y = alternative_corner_index_d7,
+  plot_clotlength_interaction(dt, y = alternative_corner_index_d7,
                               ylabel = ylabel, 
                               pvalue = 
                                 tables$pim$imputation_ws_cls$interaction)
@@ -764,7 +764,7 @@ tables$pim$imputation_ws_clst$interaction <-
   pim_results$imputation_ws_clst$interaction$pvalue[nrow(tmp)]
 
 plots$pim$imputation_ws_clst$interaction <- 
-  plot_clotlength_interaction(dm, y = alternative_corner_index_d7,
+  plot_clotlength_interaction(dt, y = alternative_corner_index_d7,
                               ylabel = ylabel, 
                               pvalue = 
                                 tables$pim$imputation_ws_clst$interaction)
@@ -894,7 +894,7 @@ tables$pim$imputation_mi$interaction <-
   pim_results$imputation_mi$interaction$pvalue[nrow(tmp)]
 
 plots$pim$imputation_mi$interaction <- 
-  plot_clotlength_interaction(dm, y = alternative_corner_index_d7,
+  plot_clotlength_interaction(dt, y = alternative_corner_index_d7,
                               ylabel = ylabel, 
                               pvalue = 
                                 tables$pim$imputation_mi$interaction)
