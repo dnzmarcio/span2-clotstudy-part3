@@ -1,7 +1,7 @@
 ---
 title: "SPAN 2 Clot Study - Day 7 Corner Test"
 subtitle: "mITT Population"
-author: "Marcio Diniz, Karni Bedirian"
+author: "Marcio Diniz, Karni Bedirian, Shu-Hsiang Wang"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   html:
