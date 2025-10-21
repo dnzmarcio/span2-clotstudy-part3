@@ -28,7 +28,7 @@ quarto_render(input = "01_report_sample_size.qmd",
 #### Descriptive Analysis ----
 
 source("02_feasibility_analysis.R")
-quarto_render(input = "01_report_feasibility.qmd",
+quarto_render(input = "02_report_feasibility.qmd",
               output_file = paste0("report_feasibility ",
                                    Sys.Date(), ".html"))
 
@@ -50,13 +50,13 @@ source("04_neurodeficit_battery_dataset.R")
 
 source("05_full_span_neuroscore_analysis_mitt.R")
 quarto_render(input = "05_report_full_span_score_mitt.qmd",
-              output_file = paste0("reports/report_full_span_score_mitt ",
+              output_file = paste0("report_full_span_score_mitt ",
                                    Sys.Date(), ".html"))
 ##### PP analysis ----
 
 source("05_full_span_neuroscore_analysis_pp.R")
 quarto_render(input = "05_report_full_span_score_pp.qmd",
-              output_file = paste0("reports/report_full_span_score_pp ",
+              output_file = paste0("report_full_span_score_pp ",
                                    Sys.Date(), ".html"))
 
 ### Alternative Corner Test ----
@@ -69,75 +69,75 @@ source("06_corner_test_dataset.R")
 
 source("07_d30_corner_test_analysis_mitt.R")
 quarto_render(input = "07_report_d30_corner_test_mitt.qmd",
-              output_file = paste0("reports/report_d30_corner_test_mitt ",
+              output_file = paste0("report_d30_corner_test_mitt ",
                                    Sys.Date(), ".html"))
 
 source("08_d7_corner_test_analysis_mitt.R")
 quarto_render(input = "08_report_d7_corner_test_mitt.qmd",
-              output_file = paste0("reports/report_d7_corner_test_mitt ",
+              output_file = paste0("report_d7_corner_test_mitt ",
                                    Sys.Date(), ".html"))
 ##### PP analysis ----
 
 source("07_d30_corner_test_analysis_pp.R")
 quarto_render(input = "07_report_d30_corner_test_pp.qmd",
-              output_file = paste0("reports/report_d30_corner_test_pp ",
+              output_file = paste0("report_d30_corner_test_pp ",
                                    Sys.Date(), ".html"))
 
 source("08_d7_corner_test_analysis_pp.R")
 quarto_render(input = "08_report_d7_corner_test_pp.qmd",
-              output_file = paste0("reports/report_d7_corner_test_pp ",
+              output_file = paste0("report_d7_corner_test_pp ",
                                    Sys.Date(), ".html"))
 
 ### Day 2 MRI ----
 
 ##### Data ----
 
-source("08_mri_d2_dataset.R")
+source("09_mri_d2_dataset.R")
 
 #### Volume Fraction CSF - Left Hemisphere ----
 
-###### mITT analysis ----
-
-source("09_d2_volume_csf_left_analysis_mitt.R")
-quarto_render(input = "report_d2_volume_csf_left_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_volume_csf_left_analysis_mitt ",
-                                   Sys.Date(), ".html"))
-###### FT analysis ----
-
-source("09_d2_volume_csf_left_analysis_ft.R")
-quarto_render(input = "report_d2_volume_csf_left_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_volume_csf_left_analysis_ft ",
-                                   Sys.Date(), ".html"))
+# ###### mITT analysis ----
+# 
+# source("09_d2_volume_csf_left_analysis_mitt.R")
+# quarto_render(input = "report_d2_volume_csf_left_analysis_mitt.qmd",
+#               output_file = paste0("reports/report_d2_volume_csf_left_analysis_mitt ",
+#                                    Sys.Date(), ".html"))
+# ###### PP analysis ----
+# 
+# source("09_d2_volume_csf_left_analysis_ft.R")
+# quarto_render(input = "report_d2_volume_csf_left_analysis_pp.qmd",
+#               output_file = paste0("reports/report_d2_volume_csf_left_analysis_pp ",
+#                                    Sys.Date(), ".html"))
 
 #### Volume Fraction CSF - Right Hemisphere ----
 
-###### mITT analysis ----
-
-source("10_d2_volume_csf_right_analysis_mitt.R")
-quarto_render(input = "report_d2_volume_csf_right_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_volume_csf_right_analysis_mitt ",
-                                   Sys.Date(), ".html"))
-###### FT analysis ----
-
-source("10_d2_volume_csf_right_analysis_ft.R")
-quarto_render(input = "report_d2_volume_csf_right_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_volume_csf_right_analysis_ft ",
-                                   Sys.Date(), ".html"))
+# ###### mITT analysis ----
+# 
+# source("10_d2_volume_csf_right_analysis_mitt.R")
+# quarto_render(input = "report_d2_volume_csf_right_analysis_mitt.qmd",
+#               output_file = paste0("reports/report_d2_volume_csf_right_analysis_mitt ",
+#                                    Sys.Date(), ".html"))
+# ###### PP analysis ----
+# 
+# source("10_d2_volume_csf_right_analysis_ft.R")
+# quarto_render(input = "report_d2_volume_csf_right_analysis_pp.qmd",
+#               output_file = paste0("reports/report_d2_volume_csf_right_analysis_pp ",
+#                                    Sys.Date(), ".html"))
 
 #### Volume Fraction Tissue - Left Hemisphere ----
 
-###### mITT analysis ----
-
-source("11_d2_volume_tissue_left_analysis_mitt.R")
-quarto_render(input = "report_d2_volume_tissue_left_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_volume_tissue_left_analysis_mitt ",
-                                   Sys.Date(), ".html"))
-###### FT analysis ----
-
-source("11_d2_volume_tissue_left_analysis_ft.R")
-quarto_render(input = "report_d2_volume_tissue_left_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_volume_tissue_left_analysis_ft ",
-                                   Sys.Date(), ".html"))
+# ###### mITT analysis ----
+# 
+# source("11_d2_volume_tissue_left_analysis_mitt.R")
+# quarto_render(input = "report_d2_volume_tissue_left_analysis_mitt.qmd",
+#               output_file = paste0("reports/report_d2_volume_tissue_left_analysis_mitt ",
+#                                    Sys.Date(), ".html"))
+# ###### PP analysis ----
+# 
+# source("11_d2_volume_tissue_left_analysis_ft.R")
+# quarto_render(input = "report_d2_volume_tissue_left_analysis_pp.qmd",
+#               output_file = paste0("reports/report_d2_volume_tissue_left_analysis_pp ",
+#                                    Sys.Date(), ".html"))
 
 #### Volume Fraction Tissue - Right Hemisphere ----
 
@@ -147,27 +147,27 @@ source("12_d2_volume_tissue_right_analysis_mitt.R")
 quarto_render(input = "report_d2_volume_tissue_right_analysis_mitt.qmd",
               output_file = paste0("reports/report_d2_volume_tissue_right_analysis_mitt ",
                                    Sys.Date(), ".html"))
-###### FT analysis ----
+###### PP analysis ----
 
 source("12_d2_volume_tissue_right_analysis_ft.R")
-quarto_render(input = "report_d2_volume_tissue_right_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_volume_tissue_right_analysis_ft ",
+quarto_render(input = "report_d2_volume_tissue_right_analysis_pp.qmd",
+              output_file = paste0("reports/report_d2_volume_tissue_right_analysis_pp ",
                                    Sys.Date(), ".html"))
 
 #### Volume Fraction Lesion - Left Hemisphere ----
 
-###### mITT analysis ----
-
-source("13_d2_volume_lesion_left_analysis_mitt.R")
-quarto_render(input = "report_d2_volume_lesion_left_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_volume_lesion_left_analysis_mitt ",
-                                   Sys.Date(), ".html"))
-###### FT analysis ----
-
-source("13_d2_volume_lesion_left_analysis_ft.R")
-quarto_render(input = "report_d2_volume_lesion_left_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_volume_lesion_left_analysis_ft ",
-                                   Sys.Date(), ".html"))
+# ###### mITT analysis ----
+# 
+# source("13_d2_volume_lesion_left_analysis_mitt.R")
+# quarto_render(input = "report_d2_volume_lesion_left_analysis_mitt.qmd",
+#               output_file = paste0("reports/report_d2_volume_lesion_left_analysis_mitt ",
+#                                    Sys.Date(), ".html"))
+# ###### PP analysis ----
+# 
+# source("13_d2_volume_lesion_left_analysis_pp.R")
+# quarto_render(input = "report_d2_volume_lesion_left_analysis_ft.qmd",
+#               output_file = paste0("reports/report_d2_volume_lesion_left_analysis_pp ",
+#                                    Sys.Date(), ".html"))
 
 #### Volume Fraction Lesion - Right Hemisphere ----
 
@@ -177,11 +177,11 @@ source("14_d2_volume_lesion_right_analysis_mitt.R")
 quarto_render(input = "report_d2_volume_lesion_right_analysis_mitt.qmd",
               output_file = paste0("reports/report_d2_volume_lesion_right_analysis_mitt ",
                                    Sys.Date(), ".html"))
-###### FT analysis ----
+###### PP analysis ----
 
 source("14_d2_volume_lesion_right_analysis_ft.R")
-quarto_render(input = "report_d2_volume_lesion_right_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_volume_lesion_right_analysis_ft ",
+quarto_render(input = "report_d2_volume_lesion_right_analysis_pp.qmd",
+              output_file = paste0("reports/report_d2_volume_lesion_right_analysis_pp ",
                                    Sys.Date(), ".html"))
 
 #### Midline Shift Index ----
@@ -192,70 +192,70 @@ source("15_d2_mid_shift_indx_analysis_mitt.R")
 quarto_render(input = "report_d2_mid_shift_indx_analysis_mitt.qmd",
               output_file = paste0("reports/report_d2_mid_shift_indx_analysis_mitt ",
                                    Sys.Date(), ".html"))
-###### FT analysis ----
+###### PP analysis ----
 
-source("15_d2_mid_shift_indx_analysis_ft.R")
-quarto_render(input = "report_d2_mid_shift_indx_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_mid_shift_indx_analysis_ft ",
+source("15_d2_mid_shift_indx_analysis_pp.R")
+quarto_render(input = "report_d2_mid_shift_indx_analysis_pp.qmd",
+              output_file = paste0("reports/report_d2_mid_shift_indx_analysis_pp ",
                                    Sys.Date(), ".html"))
 
 ### Simple SPAN Score ----
 
-##### Data ----
-
-source("04_neurodeficit_battery_dataset.R")
-
-##### mITT analysis ----
-
-source("16_simple_span_neuroscore_analysis_mitt.R")
-quarto_render(input = "report_simple_span_score_mitt.qmd",
-              output_file = paste0("reports/report_simple_span_score_mitt ",
-                                   Sys.Date(), ".html"))
-##### FT analysis ----
-
-source("16_simple_span_neuroscore_analysis_ft.R")
-quarto_render(input = "report_simple_span_score_ft.qmd",
-              output_file = paste0("reports/report_simple_span_score_ft ",
-                                   Sys.Date(), ".html"))
+# ##### Data ----
+# 
+# source("04_neurodeficit_battery_dataset.R")
+# 
+# ##### mITT analysis ----
+# 
+# source("16_simple_span_neuroscore_analysis_mitt.R")
+# quarto_render(input = "report_simple_span_score_mitt.qmd",
+#               output_file = paste0("reports/report_simple_span_score_mitt ",
+#                                    Sys.Date(), ".html"))
+# ##### FT analysis ----
+# 
+# source("16_simple_span_neuroscore_analysis_ft.R")
+# quarto_render(input = "report_simple_span_score_ft.qmd",
+#               output_file = paste0("reports/report_simple_span_score_ft ",
+#                                    Sys.Date(), ".html"))
 
 ### MGH Score ----
 
-##### Data ----
-
-source("04_neurodeficit_battery_dataset.R")
-
-##### mITT analysis ----
-
-source("17_mgh_neuroscore_analysis_mitt.R")
-quarto_render(input = "report_mgh_score_mitt.qmd",
-              output_file = paste0("reports/report_mgh_score_mitt ",
-                                   Sys.Date(), ".html"))
-##### FT analysis ----
-
-source("17_mgh_neuroscore_analysis_ft.R")
-quarto_render(input = "report_mgh_score_ft.qmd",
-              output_file = paste0("reports/report_mgh_score_ft ",
-                                   Sys.Date(), ".html"))
+# ##### Data ----
+# 
+# source("04_neurodeficit_battery_dataset.R")
+# 
+# ##### mITT analysis ----
+# 
+# source("17_mgh_neuroscore_analysis_mitt.R")
+# quarto_render(input = "report_mgh_score_mitt.qmd",
+#               output_file = paste0("reports/report_mgh_score_mitt ",
+#                                    Sys.Date(), ".html"))
+# ##### FT analysis ----
+# 
+# source("17_mgh_neuroscore_analysis_ft.R")
+# quarto_render(input = "report_mgh_score_ft.qmd",
+#               output_file = paste0("reports/report_mgh_score_ft ",
+#                                    Sys.Date(), ".html"))
 
 
 ### Duke Score ----
 
-##### Data ----
-
-source("04_neurodeficit_battery_dataset.R")
-
-##### mITT analysis ----
-
-source("18_duke_neuroscore_analysis_mitt.R")
-quarto_render(input = "report_duke_score_mitt.qmd",
-              output_file = paste0("reports/report_duke_score_mitt ",
-                                   Sys.Date(), ".html"))
-##### FT analysis ----
-
-source("18_duke_neuroscore_analysis_ft.R")
-quarto_render(input = "report_duke_score_ft.qmd",
-              output_file = paste0("reports/report_duke_score_ft ",
-                                   Sys.Date(), ".html"))
+# ##### Data ----
+# 
+# source("04_neurodeficit_battery_dataset.R")
+# 
+# ##### mITT analysis ----
+# 
+# source("18_duke_neuroscore_analysis_mitt.R")
+# quarto_render(input = "report_duke_score_mitt.qmd",
+#               output_file = paste0("reports/report_duke_score_mitt ",
+#                                    Sys.Date(), ".html"))
+# ##### FT analysis ----
+# 
+# source("18_duke_neuroscore_analysis_ft.R")
+# quarto_render(input = "report_duke_score_ft.qmd",
+#               output_file = paste0("reports/report_duke_score_ft ",
+#                                    Sys.Date(), ".html"))
               
 ### Mortality ----
 
