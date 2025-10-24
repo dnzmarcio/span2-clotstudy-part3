@@ -367,6 +367,8 @@ plots$outcome$overall$clot_length$d30 <-
 
 # Treatment Comparisons ----
 
+ylabel <- "Alternative Corner Index at Day 7"
+
 ## PIM - No Missing Data Imputation ----
 
 dm <- dt |>
@@ -430,7 +432,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$noimputation$overall <- 
   plot_sig(data = dt,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 
@@ -458,7 +460,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$noimputation$cl3 <- 
   plot_sig(data = dt_cl3,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -485,7 +487,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$noimputation$cl4 <- 
   plot_sig(data = dt_cl4,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 
@@ -552,7 +554,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_overall$overall <- 
   plot_sig(data = dt,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 
@@ -580,7 +582,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_overall$cl3 <- 
   plot_sig(data = dt_cl3,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -607,7 +609,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_overall$cl4 <- 
   plot_sig(data = dt_cl4,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 
@@ -674,7 +676,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_cls$overall <- 
   plot_sig(data = dt,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 
@@ -702,7 +704,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_cls$cl3 <- 
   plot_sig(data = dt_cl3,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -729,7 +731,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_cls$cl4 <- 
   plot_sig(data = dt_cl4,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 ## PIM - Missing Data Imputation - Worst Score by Clot Size and Sex and Study Arm ----
@@ -795,7 +797,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_clst$overall <- 
   plot_sig(data = dt,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 
@@ -823,7 +825,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_clst$cl3 <- 
   plot_sig(data = dt_cl3,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -850,7 +852,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_ws_clst$cl4 <- 
   plot_sig(data = dt_cl4,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 ## PIM - Missing Data Imputation - Multiple Imputation ----
@@ -925,7 +927,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_mi$overall <- 
   plot_sig(data = dt,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 #### Clot length 3cm ----
@@ -952,7 +954,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_mi$cl3 <- 
   plot_sig(data = dt_cl3,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -979,7 +981,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 plots$pim$imputation_mi$cl4 <- 
   plot_sig(data = dt_cl4,
            y = alternative_corner_index_d7, 
-           ylabel = "Corner Test Index at Day 7", 
+           ylabel = ylabel, 
            p_values = pvalue_treatment)
 # Saving output ----
 rm(list=setdiff(ls(), c("file", 
