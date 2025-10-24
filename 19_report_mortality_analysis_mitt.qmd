@@ -1,0 +1,209 @@
+---
+title: "SPAN 2 Clot Study - Mortality"
+subtitle: "mITT Population"
+author: "Marcio Diniz, Karni Bedirian, Shu-hsiang Wang"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+format: 
+  html:
+    toc: true
+    toc-depth: 5
+    toc-location: left
+    column: page-right
+    self-contained: true
+    echo: true
+    code-fold: true
+    warning: false
+    message: false
+---
+
+```{r}
+source("00_utils.R") 
+load("results/span2_clot_study_p3_mortality_analysis_mitt.Rdata")
+```
+
+
+# Methodology
+`r interpretation$mortality`
+
+# Tables
+
+::: {.panel-tabset}
+
+## Overall
+
+```{r}
+tab <- tables$descriptive$overall
+nt_format(tab) |>
+  tab_header(
+    title = "Mortality - Overall"
+  )
+```
+
+## Sex
+
+```{r}
+tab <- tables$descriptive$sex
+nt_format(tab) |>
+  tab_header(
+    title = "Mortality - Sex"
+  )
+```
+
+## Site
+
+```{r}
+tab <- tables$descriptive$site
+nt_format(tab) |>
+  tab_header(
+    title = "Mortality - Site"
+  )
+```
+
+## Treatment
+
+```{r}
+tab <- tables$descriptive$txas_reperfusion
+nt_format(tab)|>
+  tab_header(
+    title = "Mortality - Treatment"
+  )
+```
+
+## Clot Length
+
+```{r}
+tab <- tables$descriptive$clot_length
+nt_format(tab)|>
+  tab_header(
+    title = "Mortality - Clot Length"
+  )
+```
+:::
+
+# Plots
+
+::: {.panel-tabset}
+
+
+### Overall
+
+::: {.panel-tabset}
+
+#### All days
+```{r fig.height=7}
+plots$txas_reperfusion$overall$all_days
+```
+
+#### First Week
+```{r fig.height=7}
+plots$txas_reperfusion$overall$seven_days
+```
+
+:::
+
+### CL3
+
+::: {.panel-tabset}
+
+#### All days
+```{r fig.height=7}
+plots$txas_reperfusion$cl3$all_days
+
+```
+
+#### First Week
+```{r fig.height=7}
+plots$txas_reperfusion$cl3$seven_days
+```
+
+:::
+
+
+### CL4
+
+::: {.panel-tabset}
+
+#### All days
+```{r fig.height=7}
+plots$txas_reperfusion$cl4$all_days
+```
+
+#### First Week
+```{r fig.height=7}
+plots$txas_reperfusion$cl4$seven_days
+```
+
+:::
+
+:::
+
+# Test of Hypotheses
+
+::: {.panel-tabset}
+
+## Interaction
+
+```{r fig.height=6}
+plots$cox$interaction
+```
+
+
+## Overall
+
+```{r}
+tab <- tables$cox$overall
+
+gt(tab) |>
+  tab_header(
+    title = "Cox Proportional Hazard Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "HR (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) 
+```
+
+## CL3
+
+```{r}
+tab <- tables$cox$cl3
+
+gt(tab) |>
+  tab_header(
+    title = "Cox Proportional Hazard Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "HR (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) 
+```
+
+
+## CL4
+
+```{r}
+tab <- tables$cox$cl4
+
+gt(tab) |>
+  tab_header(
+    title = "Cox Proportional Hazard Model"
+  ) |>
+  tab_footnote(
+    footnote = footnote$ci,
+    locations = cells_column_labels(columns = "HR (95% CI)")
+  ) |>
+  tab_footnote(
+    footnote = footnote$pvals,
+    locations = cells_column_labels(columns = "p value")
+  ) 
+```
+:::
+
