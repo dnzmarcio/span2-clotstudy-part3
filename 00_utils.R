@@ -718,6 +718,63 @@ plot_clotlength <- function(data, y, ylabel,
                             as_labeller(c("3" = "3cm", "4" = "4cm"))))
 }
 
+plot_clotlength_stackedbar <- function(data, y, ylabel, size_perc = 4){
+  
+  dt_sum <- data %>%
+    group_by(txas_reperfusion, clot_length, {{y}}) %>%  # Group by treatment and score
+    summarise(count = n(), .groups = "drop") %>%     # Count occurrences
+    group_by(txas_reperfusion, clot_length) %>%                      # Group again by treatment
+    mutate(perc_value = round_percentages((count / sum(count)) * 100))
+  
+  dt_sum_complete <- dt_sum |>
+    ungroup() |>
+    mutate({{y}} := factor({{y}}, levels = c(4,3,2,1,0))) |>
+    group_by(txas_reperfusion, clot_length) |>
+    complete({{y}},
+             fill = list(perc_value = 0),
+             explicit = TRUE)
+  
+  index <- c(1, 2, 3, 4, 7)
+  #tmp <- as.character(colors[index])
+  
+  tmp <- c(c(
+    "4" = "#D55E00", 
+    "3" = "#009E73",
+    "2" = "#56B4E9",
+    "1" = "#E69F00",
+    "0" = "#CACACA"   
+  ))
+  
+  ggplot(dt_sum_complete, aes(x = txas_reperfusion, y = perc_value,
+                              fill = {{y}})) +
+    geom_col(position = "stack", width = 0.8) +
+    labs(
+      x = "Treatment Group",
+      y = "Percentage (%)",
+      fill = ylabel
+    ) +
+    geom_text(data = dt_sum_complete %>% filter(perc_value != 0),
+              aes(label=paste0(sprintf("%1.1f", perc_value),"%")),
+              position=position_stack(vjust=0.5),
+              size = size_perc
+    ) +
+    theme_bw(base_size = 16) +
+    scale_fill_manual(ylabel, values = tmp,
+                      guide = guide_legend(reverse = TRUE)
+    ) +
+    theme(
+      axis.title.x = element_text(size = 13),
+      axis.title.y = element_text(size = 13),
+      axis.text.x = element_text(size = 12),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 11),
+      legend.text = element_text(size = 11),
+      legend.position = "top"
+    ) + scale_y_continuous(limits = c(0,100.2)) +
+    facet_wrap(~ clot_length, ncol = 3, nrow = 2)
+  
+}
+
 
 plot_clotlength_interaction <- 
   function(data, y, ylabel,
@@ -765,7 +822,72 @@ plot_clotlength_interaction <-
     scale_y_continuous(limits = c(lower,upper))
 }
 
-
+plot_clotlength_stackedbar_interaction <- 
+  function(data, y, ylabel, pvalue, size_perc = 4){
+  
+  dt_sum <- data %>%
+    select(txas_reperfusion, clot_length, {{y}}) |>
+    na.omit() |> 
+    group_by(txas_reperfusion, clot_length, {{y}}) %>%  # Group by treatment and score
+    summarise(count = n(), .groups = "drop") %>%     # Count occurrences
+    group_by(txas_reperfusion, clot_length) %>%                      # Group again by treatment
+    mutate(perc_value = round_percentages((count / sum(count)) * 100))
+  
+  dt_sum_complete <- dt_sum |>
+    ungroup() |>
+    mutate({{y}} := factor({{y}}, levels = c(4,3,2,1,0))) |>
+    group_by(txas_reperfusion, clot_length) |>
+    complete({{y}},
+             fill = list(perc_value = 0),
+             explicit = TRUE) |>
+    mutate(txas_reperfusion_cl = 
+             paste0(txas_reperfusion, " and ", clot_length, "cm"),
+           txas_reperfusion_cl = factor(txas_reperfusion_cl,
+                                        levels = c("Control and 3cm",
+                                                   "TNKase and 3cm",
+                                                   "Control and 4cm",
+                                                   "TNKase and 4cm")))
+  
+  index <- c(1, 2, 3, 4, 7)
+  #tmp <- as.character(colors[index])
+  
+  tmp <- c(
+    "4" = "#D55E00", 
+    "3" = "#009E73",
+    "2" = "#56B4E9",
+    "1" = "#E69F00",
+    "0" = "#CACACA"   
+  )
+  
+  ggplot(dt_sum_complete, aes(x = txas_reperfusion_cl, y = perc_value,
+                              fill = {{y}})) +
+    geom_col(position = "stack", width = 0.8) +
+    labs(
+      x = "Treatment Group and Clot Length",
+      y = "Percentage (%)",
+      fill = ylabel, 
+      caption = glue("p-value for interaction {pvalue}")
+    ) +
+    geom_text(data = dt_sum_complete %>% filter(perc_value != 0),
+              aes(label=paste0(sprintf("%1.1f", perc_value),"%")),
+              position=position_stack(vjust=0.5),
+              size = size_perc
+    ) +
+    theme_bw(base_size = 16) +
+    scale_fill_manual(ylabel, values = tmp,
+                      guide = guide_legend(reverse = TRUE)
+    ) +
+    theme(
+      axis.title.x = element_text(size = 13),
+      axis.title.y = element_text(size = 13),
+      axis.text.x = element_text(size = 12),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 11),
+      legend.text = element_text(size = 11),
+      legend.position = "top"
+    ) + scale_y_continuous(limits = c(0,100.2))
+  
+}
 
 plot_site <- function(data, y, ylabel, lower = NULL, upper = NULL){
   endpoint <- data |> pull({{y}})
@@ -1294,7 +1416,7 @@ plot_sig <- function(data, y, ylabel, p_values,
   
 }
 
-plot_sig_bar <- function(data, y, ylabel, p_values, route,
+plot_sig_bar <- function(data, y, ylabel, p_values, 
                          lower = NULL, upper = NULL,
                          size_perc = 4) {
   
@@ -1308,32 +1430,11 @@ plot_sig_bar <- function(data, y, ylabel, p_values, route,
   
   upper_max = 100
   
-  if(route == "IV"){
-    upper_sig = c(upper_max + 3,
-                  upper_max + 9,
-                  upper_max + 14,
-                  upper_max + 18)
-    upper_lim <- upper_max + 6
-    comparisons <- list(
-      c("Control", "H"),
-      c("V Control", "I"),
-      c("IV Control", "J"),
-      c("IV Control", "K")
-    )
-  } else if (route == "IP") {
-    upper_sig = c(upper_max + 6)
-    upper_lim <- upper_max + 6
-    comparisons <- list(
-      c("IP Control", "L")
-      #c("IP Control", "M")
-    )
-  } else {
-    upper_sig = c(upper_max + 6)
-    upper_lim <- upper_max + 6
-    comparisons <- list(
-      c("Control", "TNKase")
-    )
-  }
+  upper_sig = c(upper_max + 6)
+  upper_lim <- upper_max + 6
+  comparisons <- list(
+    c("Control", "TNKase"))
+
   
   # Ensure all combinations of txas_reperfusion and postop_d1_nds_score exist
   dt_sum_complete <- dt_sum |>
