@@ -1248,6 +1248,22 @@ extract_treatment <- function(list, oneminus){
     rename('Treatment' = group, 'PI (95% CI)' = ci, 'p value' = pvalue)
 }
 
+extract_clot_length <- function(list, oneminus){
+  list %>%
+    filter(str_detect(variable, "txas_reperfusion")) %>%
+    select(-coef, -se) %>%
+    rename(group = variable, estimate = prob_index) %>%
+    mutate(group = case_when(
+      oneminus == TRUE ~ str_c(str_replace(group, "clot_length", ""), " > 4cm"),
+      oneminus == FALSE ~ str_c(str_replace(group, "clot_length", ""), " < 4cm")
+      
+    )) %>%
+    mutate(ci = glue("{round(estimate, 2)} ({round(lower, 2)}; {round(upper, 2)})"),
+           pvalue = pvalue(pvalue, prefix = c("< ", "", ""))) %>%
+    select(group, ci, pvalue) %>%
+    rename('Treatment' = group, 'PI (95% CI)' = ci, 'p value' = pvalue)
+}
+
 
 plot_pi <- function(list, route, oneminus){
   dp <- list %>%
@@ -1621,10 +1637,9 @@ data_labels <-
        srg_awake_min = "Length of occlusion (minutes)",
        txas_reperfusion = "Treatment",
        full_span_score = "Full SPAN Score at Day 30",
-       animal_death_d3 = "Animal Death at Day 3",
-       animal_death_d7 = "Animal Death at Day 7",
-       animal_death_d30 = "Animal Death at Day 30",
-       animal_death_before_conduct_d30 = "Animal Death at Day 30 without NeuroDeficit Score at Day 30",
+       animal_death_before_conduct_d3 = "Animal Death at Day 3",
+       animal_death_before_conduct_d7 = "Animal Death at Day 7",
+       animal_death_before_conduct_d30 = "Animal Death at Day 30",
        behav_d30_conduct = "Conduct Behavior Tests at Day 30", 
        behav_d30_conduct_rsn = "Reason for not conducting behavior tests at Day 30",
        corner_bl_conduct = "Conduct Corner Test at Day 0",
