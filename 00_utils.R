@@ -1528,7 +1528,7 @@ interpretation$mortality <-
   
   glue("Kaplan-Meier curves were plotted for treatment vs control. Hazard ratios were estimated using Cox Regression Models. The hazard ratio (HR) represents the risk of death from Treament group relative to the risk of death from the Control grup at any time in the trial. When HR = 1, we do not see evidence of different mortality risk between the study arms.
 
-The models were adjusted for sex and animal model and stratified by site.")
+The models were adjusted for sex and clot length and stratified by site.")
 
 #Models where the proportional hazards (PH) assumption for the main treatment effect was not met were also stratified by animal model. 
 # The PH assumption for treatment was assessed based on Schoenfeld residuals. Hazard ratios for models where the PH p value < 0.05 (PH assumption violated) are not valid. Hazard ratios with 95% C.I. from 0 to Infinity mean that the model did not converge and are also not valid. 
