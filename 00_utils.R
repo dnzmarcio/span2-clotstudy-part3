@@ -809,15 +809,15 @@ plot_clotlength_interaction <-
                  position = position_dodge(width = 1)) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1)) +
-    labs(x = "Treatment", y = ylabel, 
+    labs(x = "Clot Length", y = ylabel, 
          caption = glue("p-value for interaction {pvalue}")) +
     theme_bw(base_size = 16) +
     scale_fill_manual("Treatment", values = tmp) +
     theme(legend.position = "top",
           axis.title.y = element_text(size = 13),
-          axis.title.x = element_blank(),
-          axis.text.x = element_blank(),
-          axis.ticks.x = element_blank(),
+          # axis.title.x = element_blank(),
+          # axis.text.x = element_blank(),
+          # axis.ticks.x = element_blank(),
           axis.text.y = element_text(size = 11)) +
     scale_y_continuous(limits = c(lower,upper))
 }
