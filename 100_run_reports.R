@@ -262,14 +262,14 @@ quarto_render(input = "16_report_d2_mid_shift_indx_analysis_pp.qmd",
 #### mITT analysis ----
 
 source("19_mortality_analysis_mitt.R")
-quarto_render(input = "report_mortality_analysis_mitt.qmd",
-              output_file = paste0("reports/report_mortality_analysis_mitt ",
+quarto_render(input = "19_report_mortality_analysis_mitt.qmd",
+              output_file = paste0("report_mortality_analysis_mitt ",
                                    Sys.Date(), ".html"))
 #### FT analysis -----
 
-source("19_mortality_analysis_ft.R")
-quarto_render(input = "report_mortality_analysis_ft.qmd",
-              output_file = paste0("reports/report_mortality_analysis_ft ",
+source("19_mortality_analysis_pp.R")
+quarto_render(input = "19_report_mortality_analysis_pp.qmd",
+              output_file = paste0("report_mortality_analysis_ft ",
                                    Sys.Date(), ".html"))              
 
 ### Bederson Neurodeficit score at day 1 ----
@@ -277,14 +277,14 @@ quarto_render(input = "report_mortality_analysis_ft.qmd",
 #### mITT analysis ----
 
 source("20_bederson_nds_d1_analysis_mitt.R")
-quarto_render(input = "report_d1_bederson_nds_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d1_bederson_nds_analysis_mitt ",
+quarto_render(input = "20_report_d1_bederson_nds_analysis_mitt.qmd",
+              output_file = paste0("report_d1_bederson_nds_analysis_mitt ",
                                    Sys.Date(), ".html"))   
 #### FT analysis ----
 
-source("20_bederson_nds_d1_analysis_ft.R")
-quarto_render(input = "report_d1_bederson_nds_analysis_ft.qmd",
-              output_file = paste0("reports/report_d1_bederson_nds_analysis_ft ",
+source("20_bederson_nds_d1_analysis_pp.R")
+quarto_render(input = "20_report_d1_bederson_nds_analysis_pp.qmd",
+              output_file = paste0("report_d1_bederson_nds_analysis_pp ",
                                    Sys.Date(), ".html"))       
 
 ### Bederson Neurodeficit score at day 2 ----
@@ -292,14 +292,14 @@ quarto_render(input = "report_d1_bederson_nds_analysis_ft.qmd",
 #### mITT analysis ----
 
 source("21_bederson_nds_d2_analysis_mitt.R")
-quarto_render(input = "report_d2_bederson_nds_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d2_bederson_nds_analysis_mitt ",
+quarto_render(input = "21_report_d2_bederson_nds_analysis_mitt.qmd",
+              output_file = paste0("report_d2_bederson_nds_analysis_mitt ",
                                    Sys.Date(), ".html"))   
 #### FT analysis ----
 
-source("21_bederson_nds_d2_analysis_ft.R")
-quarto_render(input = "report_d2_bederson_nds_analysis_ft.qmd",
-              output_file = paste0("reports/report_d2_bederson_nds_analysis_ft ",
+source("21_bederson_nds_d2_analysis_pp.R")
+quarto_render(input = "21_report_d2_bederson_nds_analysis_pp.qmd",
+              output_file = paste0("report_d2_bederson_nds_analysis_pp ",
                                    Sys.Date(), ".html"))  
 
 
@@ -308,14 +308,14 @@ quarto_render(input = "report_d2_bederson_nds_analysis_ft.qmd",
 #### mITT analysis ----
 
 source("22_bederson_nds_d30_analysis_mitt.R")
-quarto_render(input = "report_d30_bederson_nds_analysis_mitt.qmd",
-              output_file = paste0("reports/report_d30_bederson_nds_analysis_mitt ",
+quarto_render(input = "22_report_d30_bederson_nds_analysis_mitt.qmd",
+              output_file = paste0("report_d30_bederson_nds_analysis_mitt ",
                                    Sys.Date(), ".html"))   
 #### FT analysis
 
-source("22_bederson_nds_d30_analysis_ft.R")
-quarto_render(input = "report_d30_bederson_nds_analysis_ft.qmd",
-              output_file = paste0("reports/report_d30_bederson_nds_analysis_ft ",
+source("22_bederson_nds_d30_analysis_pp.R")
+quarto_render(input = "22_report_d30_bederson_nds_analysis_pp.qmd",
+              output_file = paste0("report_d30_bederson_nds_analysis_pp ",
                                    Sys.Date(), ".html"))              
 
 
