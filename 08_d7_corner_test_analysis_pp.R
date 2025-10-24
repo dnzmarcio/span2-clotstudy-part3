@@ -251,6 +251,8 @@ tables$outcome$txas_reperfusion <- dt |>
 
 # Plots ----
 
+## Overall ----
+
 ### Day 0 ----
 dt_plot = dt
 
@@ -288,7 +290,7 @@ plots$outcome$overall$clot_length$d0 <-
 
 ### Day 7 ----
 
-ylabel <- "Alternative Corner Test Index at Day 7"
+ylabel <- "Alternative Corner Index at Day 7"
 
 plots$outcome$overall$txas_reperfusion$d7 <-
   plot_treat(data = dt_plot,
@@ -311,13 +313,6 @@ plots$outcome$overall$site$d7 <-
             lower = 0,
             upper = 1)
 
-
-plots$outcome$overall$clot_length$d7 <-
-  plot_site(data = dt_plot,
-            y = alternative_corner_index_d7,
-            ylabel = ylabel,
-            lower = 0,
-            upper = 1)
 
 plots$outcome$overall$clot_length$d7 <-
   plot_clotlength(data = dt_plot,
@@ -352,18 +347,216 @@ plots$outcome$overall$site$d30 <-
             upper = 1)
 
 plots$outcome$overall$clot_length$d30 <-
+  plot_clotlength(data = dt_plot,
+                  y = alternative_corner_index_d30,
+                  ylabel = ylabel,
+                  lower = 0,
+                  upper = 1)
+
+## Cl3 ----
+
+### Day 0 ----
+dt_plot = dt_cl3
+
+ylabel <- "Alternative Corner Index at Baseline"
+
+plots$outcome$cl3$txas_reperfusion$d0 <-
+  plot_treat(data = dt_plot,
+             y = alternative_corner_index_d0,
+             ylabel = ylabel,
+             lower = 0,
+             upper = 1)
+
+plots$outcome$cl3$sex$d0 <-
+  plot_sex(data = dt_plot,
+           y = alternative_corner_index_d0,
+           ylabel = ylabel,
+           lower = 0,
+           upper = 1)
+
+plots$outcome$cl3$site$d0 <-
+  plot_site(data = dt_plot,
+            y = alternative_corner_index_d0,
+            ylabel = ylabel,
+            lower = 0,
+            upper = 1)
+
+
+plots$outcome$cl3$clot_length$d0 <-
+  plot_clotlength(data = dt_plot,
+                  y = alternative_corner_index_d0,
+                  ylabel = ylabel,
+                  lower = 0,
+                  upper = 1)
+
+
+### Day 7 ----
+
+ylabel <- "Alternative Corner Index at Day 7"
+
+plots$outcome$cl3$txas_reperfusion$d7 <-
+  plot_treat(data = dt_plot,
+             y = alternative_corner_index_d7,
+             ylabel = ylabel,
+             lower = 0,
+             upper = 1)
+
+plots$outcome$cl3$sex$d7 <-
+  plot_sex(data = dt_plot,
+           y = alternative_corner_index_d7,
+           ylabel = ylabel,
+           lower = 0,
+           upper = 1)
+
+plots$outcome$cl3$site$d7 <-
+  plot_site(data = dt_plot,
+            y = alternative_corner_index_d7,
+            ylabel = ylabel,
+            lower = 0,
+            upper = 1)
+
+
+plots$outcome$cl3$clot_length$d7 <-
+  plot_clotlength(data = dt_plot,
+                  y = alternative_corner_index_d7,
+                  ylabel = ylabel,
+                  lower = 0,
+                  upper = 1)
+
+### Day 30 ----
+
+ylabel <- "Alternative Corner Index at Day 30"
+
+plots$outcome$cl3$txas_reperfusion$d30 <-
+  plot_treat(data = dt_plot,
+             y = alternative_corner_index_d30,
+             ylabel = ylabel,
+             lower = 0,
+             upper = 1)
+
+plots$outcome$cl3$sex$d30 <-
+  plot_sex(data = dt_plot,
+           y = alternative_corner_index_d30,
+           ylabel = ylabel,
+           lower = 0,
+           upper = 1)
+
+plots$outcome$cl3$site$d30 <-
   plot_site(data = dt_plot,
             y = alternative_corner_index_d30,
             ylabel = ylabel,
             lower = 0,
             upper = 1)
 
-plots$outcome$overall$clot_length$d30 <-
+plots$outcome$cl3$clot_length$d30 <-
   plot_clotlength(data = dt_plot,
                   y = alternative_corner_index_d30,
                   ylabel = ylabel,
                   lower = 0,
                   upper = 1)
+
+## CL4 ----
+
+### Day 0 ----
+dt_plot = dt
+
+ylabel <- "Alternative Corner Index at Baseline"
+
+plots$outcome$cl4$txas_reperfusion$d0 <-
+  plot_treat(data = dt_plot,
+             y = alternative_corner_index_d0,
+             ylabel = ylabel,
+             lower = 0,
+             upper = 1)
+
+plots$outcome$cl4$sex$d0 <-
+  plot_sex(data = dt_plot,
+           y = alternative_corner_index_d0,
+           ylabel = ylabel,
+           lower = 0,
+           upper = 1)
+
+plots$outcome$cl4$site$d0 <-
+  plot_site(data = dt_plot,
+            y = alternative_corner_index_d0,
+            ylabel = ylabel,
+            lower = 0,
+            upper = 1)
+
+
+plots$outcome$cl4$clot_length$d0 <-
+  plot_clotlength(data = dt_plot,
+                  y = alternative_corner_index_d0,
+                  ylabel = ylabel,
+                  lower = 0,
+                  upper = 1)
+
+
+### Day 7 ----
+
+ylabel <- "Alternative Corner Index at Day 7"
+
+plots$outcome$cl4$txas_reperfusion$d7 <-
+  plot_treat(data = dt_plot,
+             y = alternative_corner_index_d7,
+             ylabel = ylabel,
+             lower = 0,
+             upper = 1)
+
+plots$outcome$cl4$sex$d7 <-
+  plot_sex(data = dt_plot,
+           y = alternative_corner_index_d7,
+           ylabel = ylabel,
+           lower = 0,
+           upper = 1)
+
+plots$outcome$cl4$site$d7 <-
+  plot_site(data = dt_plot,
+            y = alternative_corner_index_d7,
+            ylabel = ylabel,
+            lower = 0,
+            upper = 1)
+
+
+plots$outcome$cl4$clot_length$d7 <-
+  plot_clotlength(data = dt_plot,
+                  y = alternative_corner_index_d7,
+                  ylabel = ylabel,
+                  lower = 0,
+                  upper = 1)
+
+### Day 30 ----
+
+ylabel <- "Alternative Corner Index at Day 30"
+
+plots$outcome$cl4$txas_reperfusion$d30 <-
+  plot_treat(data = dt_plot,
+             y = alternative_corner_index_d30,
+             ylabel = ylabel,
+             lower = 0,
+             upper = 1)
+
+plots$outcome$cl4$sex$d30 <-
+  plot_sex(data = dt_plot,
+           y = alternative_corner_index_d30,
+           ylabel = ylabel,
+           lower = 0,
+           upper = 1)
+
+plots$outcome$cl4$site$d30 <-
+  plot_site(data = dt_plot,
+            y = alternative_corner_index_d30,
+            ylabel = ylabel,
+            lower = 0,
+            upper = 1)
+
+plots$outcome$cl4$clot_length$d30 <-
+  plot_clotlength(data = dt_plot,
+                  y = alternative_corner_index_d30,
+                  ylabel = ylabel,
+                  lower = 0,
+                  upper = 1)
+
 
 # Treatment Comparisons ----
 
