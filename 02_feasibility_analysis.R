@@ -1,5 +1,6 @@
 rm(list = ls())
 
+
 # Load --------------------------------------------------------------------
 
 source("00_utils.R")
@@ -230,7 +231,8 @@ tables$procedural_dropout$clot_length <- aux |>
 
 
 aux <- dt_feasibility$mitt |>
-  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery) 
+  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery,
+         -c(postop_d1_nds_score_conduct:animal_death_before_conduct_d30)) 
 
 
 tables$mitt$overall <- aux |>
@@ -332,7 +334,8 @@ tables$partial_treatment$clot_length <- aux |>
 
 
 aux <- dt_feasibility$pp |>
-  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery)
+  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery,
+         -c(postop_d1_nds_score_conduct:animal_death_before_conduct_d30))
 
 
 tables$pp$overall <- aux |>
@@ -384,7 +387,8 @@ tables$pp$clot_length <- aux |>
 
 
 aux <- dt_feasibility$loss_followup |>
-  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery)
+  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery,
+         -c(postop_d1_nds_score_conduct:eos_nds_score_conduct))
 
 
 tables$loss_followup$overall <- aux |>
@@ -436,7 +440,8 @@ tables$loss_followup$clot_length <- aux |>
 # Full Analysis Population ----
 
 aux <- dt_feasibility$full_data |>
-  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery)
+  select(-enro_animal_id, -rand_conduct , -srg_conduct, -successful_surgery,
+         -c(postop_d1_nds_score_conduct:animal_death_before_conduct_d30))
 
 
 tables$full_data$overall <- aux |>
