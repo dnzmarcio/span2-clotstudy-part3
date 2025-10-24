@@ -27,7 +27,14 @@ dataset_mri <-
   filter(!is.na(enro_animal_id)) |>
   select(enro_animal_id, mri_d2_conduct)
 
-dataset <- left_join(dataset_feas, dataset_mri, by = "enro_animal_id") 
+dataset_behav <- 
+  read_csv(file = behavior) |>
+  clean_names() |>
+  filter(!is.na(enro_animal_id)) |>
+  select(enro_animal_id, corner_d7_conduct)
+
+dataset <- left_join(dataset_feas, dataset_mri, by = "enro_animal_id") |>
+  left_join(dataset_behav, by = "enro_animal_id")
 
 ## Data labeling ----
 
@@ -39,6 +46,9 @@ dt <- dataset %>%
                            labels = c("Female", "Male", 
                                       "Ovariectomized Female", 
                                       "Neutered Maled")),
+         enro_model = factor(enro_model, levels = c(1, 2, 3, 4, 5),
+                             labels = c("SHR", "OIH",
+                                        "Aged", "YHM", "YHR")),
          rand_conduct = factor(rand_conduct,
                                levels = 0:1,
                                labels = c("No", "Yes")),
@@ -66,6 +76,7 @@ dt <- dataset %>%
            ifelse(is.na(postop_d1_nds_score), "No", "Yes"),
          postop_d2_nds_score_conduct = 
            ifelse(is.na(postop_d2_nds_score), "No", "Yes"),
+         srg_nds_score = as.factor(srg_nds_score),
          postop_d1_nds_score = as.factor(postop_d1_nds_score),
          postop_d2_nds_score = as.factor(postop_d2_nds_score),
          postop_d1_nds_score_conduct = as.factor(postop_d1_nds_score_conduct),
@@ -170,14 +181,17 @@ dt <- dataset %>%
         .default = NA
       )) |> 
   mutate(
-    behav_d30_conduct = ifelse(is.na(behav_d30_conduct), 0, behav_d30_conduct),
     animal_death_before_conduct_d30 = ifelse(behav_d30_conduct == 0 &
                                                eos_day_diff_srg_death <= 30,
                                              "Yes", "No"),
+    animal_death_before_conduct_d7 = ifelse(corner_d7_conduct == 0 &
+                                              eos_day_diff_srg_death <= 7, 
+                                            "Yes", "No"),
     animal_death_before_conduct_d3 = ifelse(mri_d2_conduct == 0 &
                                                eos_day_diff_srg_death <= 3, 
                                             "Yes", "No")) |>
-  select(-contains("redcap"))
+  select(-contains("redcap")) |>
+  mutate(srg_clot_length = as.factor(round(srg_clot_length, 0)))
 
 # Full data ----
 
@@ -310,6 +324,7 @@ dt_feasibility$mitt <- aux |>
          eos_nds_score_conduct,
          eos_day_diff_srg_death, 
          animal_death_before_conduct_d3,
+         animal_death_before_conduct_d7,
          animal_death_before_conduct_d30)
 
 tmp <- dt_feasibility$mitt %>% 
@@ -362,6 +377,7 @@ dt_feasibility$pp <- aux |>
          eos_nds_score_conduct,
          eos_day_diff_srg_death, 
          animal_death_before_conduct_d3,
+         animal_death_before_conduct_d7,
          animal_death_before_conduct_d30)
 
 tmp <- dt_feasibility$pp %>%
@@ -398,6 +414,7 @@ dt_feasibility$loss_followup <- aux |>
          eos_nds_score_conduct,
          eos_day_diff_srg_death, 
          animal_death_before_conduct_d3,
+         animal_death_before_conduct_d7,
          animal_death_before_conduct_d30)
 
 tmp <- dt_feasibility$loss_followup %>%
@@ -436,6 +453,7 @@ dt_feasibility$full_data <- aux |>
          eos_nds_score_conduct,
          eos_day_diff_srg_death, 
          animal_death_before_conduct_d3,
+         animal_death_before_conduct_d7,
          animal_death_before_conduct_d30)
 
 tmp <- dt_feasibility$full_data %>%
