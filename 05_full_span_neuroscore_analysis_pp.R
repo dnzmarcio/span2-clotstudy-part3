@@ -123,7 +123,7 @@ tables$outcome$sex$m <- dt |>
                                  helper_median_range,
                                  helper_missing2))
 
-tables$outcome$model$ag <- dt |>
+tables$outcome$site$ag <- dt |>
   filter(site == "AG") |>
   select(full_span_score, txas_reperfusion) |>
   nt_describe(group = txas_reperfusion,
@@ -134,7 +134,7 @@ tables$outcome$model$ag <- dt |>
                                  helper_median_range,
                                  helper_missing2))
 
-tables$outcome$model$dk <- dt |>
+tables$outcome$site$dk <- dt |>
   filter(site == "DK") |>
   select(full_span_score, txas_reperfusion) |>
   nt_describe(group = txas_reperfusion,
@@ -146,7 +146,7 @@ tables$outcome$model$dk <- dt |>
                                  helper_missing2))
 
 
-tables$outcome$model$iw <- dt |>
+tables$outcome$site$iw <- dt |>
   filter(site == "IW") |>
   select(full_span_score, txas_reperfusion) |>
   nt_describe(group = txas_reperfusion,
@@ -158,7 +158,7 @@ tables$outcome$model$iw <- dt |>
                                  helper_missing2))
 
 
-tables$outcome$model$mg <- dt |>
+tables$outcome$site$mg <- dt |>
   filter(site == "MG") |>
   select(full_span_score, txas_reperfusion) |>
   nt_describe(group = txas_reperfusion,
@@ -169,7 +169,7 @@ tables$outcome$model$mg <- dt |>
                                  helper_median_range,
                                  helper_missing2))
 
-tables$outcome$model$sd <- dt |>
+tables$outcome$site$sd <- dt |>
   filter(site == "SD") |>
   select(full_span_score, txas_reperfusion) |>
   nt_describe(group = txas_reperfusion,
@@ -181,7 +181,7 @@ tables$outcome$model$sd <- dt |>
                                  helper_missing2))
 
 
-tables$outcome$model$yl <- dt |>
+tables$outcome$site$yl <- dt |>
   filter(site == "YL") |>
   select(full_span_score, txas_reperfusion) |>
   nt_describe(group = txas_reperfusion,
@@ -229,8 +229,6 @@ tables$outcome$txas_reperfusion <- dt |>
 
 ## Overall ----
 
-ylabel <- "Full SPAN Score at Day 30"
-
 plots$outcome$overall$txas_reperfusion <-
   plot_treat(data = dt,  
              y = full_span_score, 
@@ -252,8 +250,6 @@ plots$outcome$overall$site <-
             ylabel = ylabel)
 
 ## Clot Length 3 ----
-
-ylabel <- "Full SPAN Score at Day 30"
 
 plots$outcome$cl3$txas_reperfusion <-
   plot_treat(data = dt_cl3,  
@@ -315,7 +311,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm))
 
 pim_results$noimputation$interaction <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$noimputation$interaction <-  
   pim_results$noimputation$interaction$pvalue[nrow(tmp)]
@@ -333,10 +329,13 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm))
 
 pim_results$noimputation$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$noimputation$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$noimputation$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$noimputation$overall$full_output <- format_full_output(tmp)
 
@@ -348,11 +347,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$noimputation$overall <- 
-  plot_sig(data = dt,
-           y = full_span_score, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$noimputation$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = full_span_score, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$noimputation$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                 y = full_span_score, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
 
 
 #### Clot length 3cm ----
@@ -361,7 +372,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_cl3))
 
 pim_results$noimputation$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$noimputation$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -377,9 +388,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$noimputation$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -388,7 +399,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_cl4))
 
 pim_results$noimputation$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$noimputation$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -404,9 +415,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$noimputation$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 
@@ -435,7 +446,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_overall$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$interaction <-  
   pim_results$imputation_ws_overall$interaction$pvalue[nrow(tmp)]
@@ -455,10 +466,13 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_overall$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_ws_overall$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_ws_overall$overall$full_output <- format_full_output(tmp)
 
@@ -470,11 +484,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_ws_overall$overall <- 
-  plot_sig(data = dt,
-           y = full_span_score, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_ws_overall$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = full_span_score, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_ws_overall$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = full_span_score, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 
 #### Clot length 3cm ----
@@ -483,7 +509,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl3))
 
 pim_results$imputation_ws_overall$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -499,9 +525,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_overall$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -510,7 +536,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl4))
 
 pim_results$imputation_ws_overall$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -526,13 +552,13 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_overall$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 
-## PIM - Missing Data Imputation - Worst Score Clot Size and Sex ----
+## PIM - Missing Data Imputation - Clot Size and Sex ----
 
 dm_imputed <- dt |> 
   group_by(clot_length, enro_sex) |> 
@@ -558,7 +584,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_cls$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$interaction <-  
   pim_results$imputation_ws_cls$interaction$pvalue[nrow(tmp)]
@@ -577,10 +603,13 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_cls$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_ws_cls$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_ws_cls$overall$full_output <- format_full_output(tmp)
 
@@ -592,11 +621,24 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_ws_cls$overall <- 
-  plot_sig(data = dt,
-           y = full_span_score, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_ws_cls$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = full_span_score, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_ws_cls$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = full_span_score, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
+
 
 
 #### Clot length 3cm ----
@@ -605,7 +647,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl3))
 
 pim_results$imputation_ws_cls$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -621,9 +663,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_cls$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -632,7 +674,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl4))
 
 pim_results$imputation_ws_cls$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -648,12 +690,12 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_cls$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
-## PIM - Missing Data Imputation - Worst Score Clot Size and Sex and Study Arm ----
+## PIM - Missing Data Imputation - Clot Size and Sex and Study Arm ----
 
 dm_imputed <- dt |> 
   group_by(clot_length, enro_sex, txas_reperfusion) |> 
@@ -679,7 +721,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_clst$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$interaction <-  
   pim_results$imputation_ws_clst$interaction$pvalue[nrow(tmp)]
@@ -698,10 +740,13 @@ fit <- pim(full_span_score ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_clst$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_ws_clst$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_ws_clst$overall$full_output <- format_full_output(tmp)
 
@@ -713,11 +758,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_ws_clst$overall <- 
-  plot_sig(data = dt,
-           y = full_span_score, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_ws_clst$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = full_span_score, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_ws_clst$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = full_span_score, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 
 #### Clot length 3cm ----
@@ -726,7 +783,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl3))
 
 pim_results$imputation_ws_clst$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -742,9 +799,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_clst$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -753,7 +810,7 @@ fit <- pim(full_span_score ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl4))
 
 pim_results$imputation_ws_clst$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+ nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -769,9 +826,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_clst$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 ## PIM - Missing Data Imputation - Multiple Imputation ----
@@ -809,7 +866,7 @@ fit <- with(dt_imputed, pim(full_span_score ~ site +
              enro_sex + clot_length*txas_reperfusion))
 
 pim_results$imputation_mi$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$interaction <-  
   pim_results$imputation_mi$interaction$pvalue[nrow(tmp)]
@@ -828,10 +885,13 @@ fit <- with(dt_imputed, pim(full_span_score ~ site +
                               enro_sex + clot_length + txas_reperfusion))
 
 pim_results$imputation_mi$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_mi$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_mi$overall$full_output <- format_full_output(tmp)
 
@@ -843,11 +903,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_mi$overall <- 
-  plot_sig(data = dt,
-           y = full_span_score, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_mi$overall$reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = full_span_score, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_mi$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = full_span_score, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 #### Clot length 3cm ----
 
@@ -855,7 +927,7 @@ fit <- with(dt_imputed_cl3, pim(full_span_score ~ site +
                               enro_sex + txas_reperfusion))
 
 pim_results$imputation_mi$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -871,9 +943,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_mi$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 #### Clot length 4cm ----
@@ -882,7 +954,7 @@ fit <- with(dt_imputed_cl4, pim(full_span_score ~ site +
                                   enro_sex + txas_reperfusion))
 
 pim_results$imputation_mi$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -898,9 +970,9 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_mi$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = full_span_score, 
-           ylabel = ylabel, 
+           ylabel = ylabel,
            p_values = pvalue_treatment)
 
 # Saving output ----

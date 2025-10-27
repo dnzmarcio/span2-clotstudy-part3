@@ -1,6 +1,6 @@
 ---
 title: "SPAN 2 Clot Study - Full SPAN Score"
-subtitle: "Per Protocol and As-Treated"
+subtitle: "PP"
 author: "Marcio Diniz, Karni Bedirian, Shu-Hsiang Wang"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
@@ -144,7 +144,7 @@ nt_format(tab) |>
 
 #### AG
 ```{r}
-tab <- tables$outcome$model$ag
+tab <- tables$outcome$site$ag
 
 nt_format(tab) |>
   tab_header(
@@ -155,7 +155,7 @@ nt_format(tab) |>
 
 #### DK
 ```{r}
-tab <- tables$outcome$model$dk
+tab <- tables$outcome$site$dk
 
 nt_format(tab) |>
   tab_header(
@@ -166,7 +166,7 @@ nt_format(tab) |>
 
 #### IW
 ```{r}
-tab <- tables$outcome$model$iw
+tab <- tables$outcome$site$iw
 
 nt_format(tab) |>
   tab_header(
@@ -177,7 +177,7 @@ nt_format(tab) |>
 
 #### MG
 ```{r}
-tab <- tables$outcome$model$mg
+tab <- tables$outcome$site$mg
 
 nt_format(tab) |>
   tab_header(
@@ -188,7 +188,7 @@ nt_format(tab) |>
 
 #### SD
 ```{r}
-tab <- tables$outcome$model$sd
+tab <- tables$outcome$site$sd
 
 nt_format(tab) |>
   tab_header(
@@ -199,7 +199,7 @@ nt_format(tab) |>
 
 #### YL
 ```{r}
-tab <- tables$outcome$model$yl
+tab <- tables$outcome$site$yl
 
 nt_format(tab) |>
   tab_header(
@@ -295,7 +295,8 @@ plots$pim$noimputation$interaction
 #### Overall
 
 ```{r}
-tab <- tables$pim$noimputation$overall$txas_reperfusion 
+tab <- bind_rows(tables$pim$noimputation$overall$txas_reperfusion,
+                 tables$pim$noimputation$overall$clot_length)
 gt(tab) |> 
   tab_header(
     title = "Relative Effect - Probabilistic Index Model"
@@ -314,9 +315,20 @@ gt(tab) |>
 ```
 
 ##### Plot
+
+::: {.panel-tabset}
+###### Treatment
+
 ```{r}
-plots$pim$noimputation$overall
+plots$pim$noimputation$overall$txas_reperfusion
 ```
+
+###### Clot Length
+
+```{r}
+plots$pim$noimputation$overall$clot_length
+```
+:::
 
 ##### Full Output
 
@@ -407,7 +419,8 @@ plots$pim$imputation_ws_overall$interaction
 #### Overall
 
 ```{r}
-tab <- tables$pim$imputation_ws_overall$overall$txas_reperfusion 
+tab <- bind_rows(tables$pim$imputation_ws_overall$overall$txas_reperfusion,
+                 tables$pim$imputation_ws_overall$overall$clot_length) 
 gt(tab) |> 
   tab_header(
     title = "Relative Effect - Probabilistic Index Model"
@@ -426,9 +439,19 @@ gt(tab) |>
 ```
 
 ##### Plot
+::: {.panel-tabset}
+###### Treatment
+
 ```{r}
-plots$pim$imputation_ws_overall$overall
+plots$pim$imputation_ws_overall$overall$txas_reperfusion
 ```
+
+###### Clot Length
+
+```{r}
+plots$pim$imputation_ws_overall$overall$clot_length
+```
+:::
 
 ##### Full Output
 
@@ -519,7 +542,8 @@ plots$pim$imputation_ws_cls$interaction
 #### Overall
 
 ```{r}
-tab <- tables$pim$imputation_ws_cls$overall$txas_reperfusion 
+tab <- bind_rows(tables$pim$imputation_ws_cls$overall$txas_reperfusion,
+                 tables$pim$imputation_ws_cls$overall$clot_length) 
 gt(tab) |> 
   tab_header(
     title = "Relative Effect - Probabilistic Index Model"
@@ -538,9 +562,19 @@ gt(tab) |>
 ```
 
 ##### Plot
+::: {.panel-tabset}
+###### Treatment
+
 ```{r}
-plots$pim$imputation_ws_cls$overall
+plots$pim$imputation_ws_cls$overall$txas_reperfusion
 ```
+
+###### Clot Length
+
+```{r}
+plots$pim$imputation_ws_cls$overall$clot_length
+```
+:::
 
 ##### Full Output
 
@@ -631,7 +665,8 @@ plots$pim$imputation_ws_clst$interaction
 #### Overall
 
 ```{r}
-tab <- tables$pim$imputation_ws_clst$overall$txas_reperfusion 
+tab <- bind_rows(tables$pim$imputation_ws_clst$overall$txas_reperfusion,
+                 tables$pim$imputation_ws_clst$overall$clot_length) 
 gt(tab) |> 
   tab_header(
     title = "Relative Effect - Probabilistic Index Model"
@@ -650,9 +685,19 @@ gt(tab) |>
 ```
 
 ##### Plot
+::: {.panel-tabset}
+###### Treatment
+
 ```{r}
-plots$pim$imputation_ws_clst$overall
+plots$pim$imputation_ws_clst$overall$txas_reperfusion
 ```
+
+###### Clot Length
+
+```{r}
+plots$pim$imputation_ws_clst$overall$clot_length
+```
+:::
 
 ##### Full Output
 
@@ -743,7 +788,8 @@ plots$pim$imputation_mi$interaction
 #### Overall
 
 ```{r}
-tab <- tables$pim$imputation_mi$overall$txas_reperfusion 
+tab <- bind_rows(tables$pim$imputation_mi$overall$txas_reperfusion,
+                 tables$pim$imputation_mi$overall$clot_length) 
 gt(tab) |> 
   tab_header(
     title = "Relative Effect - Probabilistic Index Model"
@@ -762,9 +808,19 @@ gt(tab) |>
 ```
 
 ##### Plot
+::: {.panel-tabset}
+###### Treatment
+
 ```{r}
-plots$pim$imputation_mi$overall
+plots$pim$imputation_mi$overall$txas_reperfusion
 ```
+
+###### Clot Length
+
+```{r}
+plots$pim$imputation_mi$overall$clot_length
+```
+:::
 
 ##### Full Output
 

@@ -206,7 +206,7 @@ hush <- function(code){
 }
 
 # Summarizing model regression results
-nt_multiple_pim <- function(fit, oneminus = FALSE, mi = FALSE){
+nt_multiple_pim <- function(fit, mi = FALSE){
   
   if (!mi){
     aux <- fit@formula@predictors
@@ -217,7 +217,7 @@ nt_multiple_pim <- function(fit, oneminus = FALSE, mi = FALSE){
 
     prob_index <- plogis(fit@coef)
     q <- qnorm(1 - (0.05/2), 0, 1)
-    lower <- plogis(beta - q*se) #qnorm(1 - 0.05/n.group, 0, 1)
+    lower <- plogis(beta - q*se) 
     upper <- plogis(beta + q*se)
     
   } else {
@@ -240,24 +240,14 @@ nt_multiple_pim <- function(fit, oneminus = FALSE, mi = FALSE){
   labels <- as.list(paste0(aux,":"))
   labels <- setNames(labels, aux)
   
-  if (!oneminus){
-    out <- data.frame(prob_index,
-                      lower, upper,
-                      coef = beta, 
-                      se =  se,
-                      zscore = beta/se,
-                      pvalue = round(pvalue, 3)) |>   
-      rownames_to_column(var = "variable") 
-  } else {
-    out <- data.frame(prob_index = 1 - prob_index,
-                      lower = 1 - upper, upper = 1 - lower,
-                      coef = -beta, 
-                      se =  se,
-                      zscore = -beta/se,
-                      pvalue = round(pvalue, 3)) |>
-      rownames_to_column(var = "variable") 
-  }
-  
+  out <- data.frame(prob_index,
+                    lower, upper,
+                    coef = beta, 
+                    se =  se,
+                    zscore = beta/se,
+                    pvalue = round(pvalue, 3)) |>   
+    rownames_to_column(var = "variable") 
+
   return(out)
 }
 
@@ -1232,36 +1222,59 @@ extract_stratified_analysis <- function(list){
     mutate(pvalue = pvalue(pvalue, prefix = c("< ", "", ""))) 
 }
 
-extract_treatment <- function(list, oneminus){
-  list %>%
+extract_treatment <- function(list, oneminus = FALSE){
+  
+  out <- list %>%
     filter(str_detect(variable, "txas_reperfusion")) %>%
     select(-coef, -se) %>%
     rename(group = variable, estimate = prob_index) %>%
     mutate(group = case_when(
       oneminus == TRUE ~ str_c(str_replace(group, "txas_reperfusion", ""), " < Control"),
-      oneminus == FALSE ~ str_c(str_replace(group, "txas_reperfusion", ""), " > Control")
+      oneminus == FALSE ~ str_c("Control < ", str_replace(group, "txas_reperfusion", ""))
       
-    )) %>%
+    ))
+  
+  if (oneminus){
+    out <- out %>%
+    mutate(ci = glue("{round(1 - estimate, 2)} ({round(1 - upper, 2)}; {round(1 - lower, 2)})"),
+           pvalue = pvalue(pvalue, prefix = c("< ", "", "")))
+  } else {
+    out <- out %>%
     mutate(ci = glue("{round(estimate, 2)} ({round(lower, 2)}; {round(upper, 2)})"),
-           pvalue = pvalue(pvalue, prefix = c("< ", "", ""))) %>%
+           pvalue = pvalue(pvalue, prefix = c("< ", "", "")))
+  }
+  
+  out <- out %>%
     select(group, ci, pvalue) %>%
-    rename('Treatment' = group, 'PI (95% CI)' = ci, 'p value' = pvalue)
+    rename('Comparison' = group, 'PI (95% CI)' = ci, 'p value' = pvalue)
 }
 
-extract_clot_length <- function(list, oneminus){
+extract_clot_length <- function(list, oneminus = FALSE){
+  
+  out <-
   list %>%
-    filter(str_detect(variable, "txas_reperfusion")) %>%
+    filter(str_detect(variable, "clot_length")) %>%
     select(-coef, -se) %>%
     rename(group = variable, estimate = prob_index) %>%
     mutate(group = case_when(
-      oneminus == TRUE ~ str_c(str_replace(group, "clot_length", ""), " > 4cm"),
-      oneminus == FALSE ~ str_c(str_replace(group, "clot_length", ""), " < 4cm")
+      oneminus == TRUE ~ str_c(str_replace(group, "clot_length", ""), " < 3cm"),
+      oneminus == FALSE ~ str_c("3cm < ", str_replace(group, "clot_length", ""))
       
-    )) %>%
-    mutate(ci = glue("{round(estimate, 2)} ({round(lower, 2)}; {round(upper, 2)})"),
-           pvalue = pvalue(pvalue, prefix = c("< ", "", ""))) %>%
+    )) 
+  
+  if (oneminus){
+    out <- out %>%
+      mutate(ci = glue("{round(1 - estimate, 2)} ({round(1 - upper, 2)}; {round(1 - lower, 2)})"),
+             pvalue = pvalue(pvalue, prefix = c("< ", "", "")))
+  } else {
+    out <- out %>%
+      mutate(ci = glue("{round(estimate, 2)} ({round(lower, 2)}; {round(upper, 2)})"),
+             pvalue = pvalue(pvalue, prefix = c("< ", "", "")))
+  }
+  
+  out <- out %>%
     select(group, ci, pvalue) %>%
-    rename('Treatment' = group, 'PI (95% CI)' = ci, 'p value' = pvalue)
+    rename('Comparison' = group, 'PI (95% CI)' = ci, 'p value' = pvalue)
 }
 
 
@@ -1388,7 +1401,7 @@ extract_statistic <- function(fit, route = "iv", mi = FALSE){
   return(out)
 }
 
-plot_sig <- function(data, y, ylabel, p_values, 
+plot_treat_sig <- function(data, y, ylabel, p_values, 
                      lower = NULL, upper = NULL) {
   
   endpoint <- data |> pull({{y}})
@@ -1432,7 +1445,51 @@ plot_sig <- function(data, y, ylabel, p_values,
   
 }
 
-plot_sig_bar <- function(data, y, ylabel, p_values, 
+plot_clot_length_sig <- function(data, y, ylabel, p_values, 
+                                       lower = NULL, upper = NULL) {
+  
+  endpoint <- data |> pull({{y}})
+  if(is.null(lower) & is.null(upper)){
+    lower <- min(endpoint, na.rm = TRUE) - 0.3*abs(min(endpoint, na.rm = TRUE))
+    upper <- max(endpoint, na.rm = TRUE) + 0.4*abs(max(endpoint, na.rm = TRUE))
+  } else {
+    lower <- lower - 0.05 *(lower)
+    upper <- upper + 0.4*(upper)
+  }
+  
+  # Define comparisons for geom_signif
+  comparisons <- list(c("3", "4"))
+  upper_sig <- upper*c(0.75) 
+  index <- c(2, 1) 
+  
+  tmp <- as.character(colors[index])
+  
+  ggplot(data, aes(x = clot_length, y = {{y}},
+                   fill = clot_length)) +
+    geom_beeswarm() +
+    geom_boxplot(width=0.2, alpha=0.2,
+                 position = position_dodge(width = 1)) +
+    labs(x = "Clot Length", y = ylabel) +
+    theme_bw(base_size = 16) +
+    scale_fill_manual("Clot Length", values = tmp) +
+    theme(legend.position = "top",
+          axis.title.y = element_text(size = 14),
+          axis.text.x = element_text(size = 12),
+          axis.text.y = element_text(size = 11)) +
+    scale_y_continuous(limits = c(lower, upper)) +
+    geom_signif(
+      comparisons = comparisons,
+      map_signif_level = TRUE,
+      annotations = p_values,
+      y_position = upper_sig,  # Adjust the y_position as needed
+      tip_length = 0.02,
+      textsize = 4,
+      color = "black"
+    )
+  
+}
+
+plot_treat_sig_bar <- function(data, y, ylabel, p_values, 
                          lower = NULL, upper = NULL,
                          size_perc = 4) {
   
@@ -1499,6 +1556,86 @@ plot_sig_bar <- function(data, y, ylabel, p_values,
     ) + 
     scale_y_continuous(breaks = c(0, 20, 40, 60, 80, 100),
                          limits = c(0,110)) +
+    geom_signif(
+      comparisons = comparisons,
+      map_signif_level = TRUE,
+      annotations = p_values,
+      y_position = upper_sig,  # Adjust the y_position as needed
+      tip_length = 0.02,
+      textsize = 4,
+      color = "black"
+    )
+  
+  return(g)
+}
+
+plot_clot_length_sig_bar <- function(data, y, ylabel, p_values, 
+                                           lower = NULL, upper = NULL,
+                                           size_perc = 4) {
+  
+  dt_sum <- data %>%
+    select(txas_reperfusion, {{y}}) |>
+    na.omit() |>
+    group_by(txas_reperfusion, {{y}}) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    group_by(txas_reperfusion) %>%
+    mutate(perc_value = (count / sum(count)) * 100)
+  
+  upper_max = 100
+  
+  upper_sig = c(upper_max + 6)
+  upper_lim <- upper_max + 6
+  comparisons <- list(
+    c("Control", "TNKase"))
+  
+  
+  # Ensure all combinations of txas_reperfusion and postop_d1_nds_score exist
+  dt_sum_complete <- dt_sum |>
+    ungroup() |>
+    mutate({{y}} := factor({{y}}, levels = c(4, 3, 2, 1, 0))) |>
+    complete(txas_reperfusion, {{y}},
+             fill = list(perc_value = 0),
+             explicit = TRUE) 
+  
+  index <- c(1, 2, 3, 4, 7)
+  #tmp <- as.character(colors[index])
+  
+  tmp <- c(c(
+    "4" = "#D55E00", 
+    "3" = "#009E73",
+    "2" = "#56B4E9",
+    "1" = "#E69F00",
+    "0" = "#CACACA"   
+  ))
+  
+  g <- ggplot(dt_sum_complete, aes(x = txas_reperfusion, y = perc_value,
+                                   fill = {{y}})) +
+    geom_col(position = "stack", width = 0.8) +
+    labs(
+      x = "Treatment Group",
+      y = "Percentage (%)",
+      fill = ylabel
+    ) +
+    geom_text(data = dt_sum_complete %>% filter(perc_value != 0),
+              aes(label=paste0(sprintf("%1.1f", perc_value),"%")),
+              position=position_stack(vjust=0.5),
+              size = size_perc
+    ) +
+    theme_bw(base_size = 16) +
+    scale_fill_manual(ylabel, values = tmp, 
+                      guide = guide_legend(reverse = TRUE)
+    ) +
+    theme(
+      axis.title.x = element_text(size = 13),
+      axis.title.y = element_text(size = 13),
+      axis.text.x = element_text(size = 12),
+      axis.text.y = element_text(size = 11),
+      legend.title = element_text(size = 11),
+      legend.text = element_text(size = 11),
+      legend.position = "top"
+    ) + 
+    scale_y_continuous(breaks = c(0, 20, 40, 60, 80, 100),
+                       limits = c(0,110)) +
     geom_signif(
       comparisons = comparisons,
       map_signif_level = TRUE,

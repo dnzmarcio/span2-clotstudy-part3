@@ -351,7 +351,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm))
 
 pim_results$noimputation$interaction <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$noimputation$interaction <-  
   pim_results$noimputation$interaction$pvalue[nrow(tmp)]
@@ -369,10 +369,13 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm))
 
 pim_results$noimputation$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$noimputation$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$noimputation$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$noimputation$overall$full_output <- format_full_output(tmp)
 
@@ -384,11 +387,24 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$noimputation$overall <- 
-  plot_sig(data = dt,
-           y = p_mri_d2_fract_lesion_right, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$noimputation$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = p_mri_d2_fract_lesion_right, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$noimputation$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = p_mri_d2_fract_lesion_right, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
+
 
 
 #### Clot length 3cm ----
@@ -397,7 +413,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_cl3))
 
 pim_results$noimputation$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$noimputation$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -413,7 +429,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$noimputation$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -424,7 +440,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_cl4))
 
 pim_results$noimputation$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$noimputation$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -440,7 +456,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$noimputation$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -471,7 +487,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_overall$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$interaction <-  
   pim_results$imputation_ws_overall$interaction$pvalue[nrow(tmp)]
@@ -491,10 +507,13 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_overall$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_ws_overall$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_ws_overall$overall$full_output <- format_full_output(tmp)
 
@@ -506,11 +525,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_ws_overall$overall <- 
-  plot_sig(data = dt,
-           y = p_mri_d2_fract_lesion_right, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_ws_overall$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = p_mri_d2_fract_lesion_right, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_ws_overall$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = p_mri_d2_fract_lesion_right, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 
 #### Clot length 3cm ----
@@ -519,7 +550,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl3))
 
 pim_results$imputation_ws_overall$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -535,7 +566,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_overall$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -546,7 +577,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl4))
 
 pim_results$imputation_ws_overall$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_overall$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -562,7 +593,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_overall$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -594,7 +625,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_cls$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$interaction <-  
   pim_results$imputation_ws_cls$interaction$pvalue[nrow(tmp)]
@@ -613,10 +644,13 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_cls$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_ws_cls$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_ws_cls$overall$full_output <- format_full_output(tmp)
 
@@ -628,11 +662,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_ws_cls$overall <- 
-  plot_sig(data = dt,
-           y = p_mri_d2_fract_lesion_right, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_ws_cls$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = p_mri_d2_fract_lesion_right, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_ws_cls$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = p_mri_d2_fract_lesion_right, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 
 #### Clot length 3cm ----
@@ -641,7 +687,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl3))
 
 pim_results$imputation_ws_cls$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -657,7 +703,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_cls$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -668,7 +714,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl4))
 
 pim_results$imputation_ws_cls$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_cls$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -684,7 +730,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_cls$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -715,7 +761,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length*txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_clst$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$interaction <-  
   pim_results$imputation_ws_clst$interaction$pvalue[nrow(tmp)]
@@ -734,10 +780,13 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + clot_length + txas_reperfusion, data = na.omit(dm_imputed))
 
 pim_results$imputation_ws_clst$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_ws_clst$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_ws_clst$overall$full_output <- format_full_output(tmp)
 
@@ -749,12 +798,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_ws_clst$overall <- 
-  plot_sig(data = dt,
-           y = p_mri_d2_fract_lesion_right, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_ws_clst$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = p_mri_d2_fract_lesion_right, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
 
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_ws_clst$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = p_mri_d2_fract_lesion_right, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 #### Clot length 3cm ----
 
@@ -762,7 +822,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl3))
 
 pim_results$imputation_ws_clst$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -778,7 +838,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_clst$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -789,7 +849,7 @@ fit <- pim(p_mri_d2_fract_lesion_right ~ site +
              enro_sex + txas_reperfusion, data = na.omit(dm_imputed_cl4))
 
 pim_results$imputation_ws_clst$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE)
+  nt_multiple_pim(fit)
 
 tables$pim$imputation_ws_clst$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -805,7 +865,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_clst$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -845,7 +905,7 @@ fit <- with(dt_imputed, pim(p_mri_d2_fract_lesion_right ~ site +
                               enro_sex + clot_length*txas_reperfusion))
 
 pim_results$imputation_mi$interaction <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$interaction <-  
   pim_results$imputation_mi$interaction$pvalue[nrow(tmp)]
@@ -864,10 +924,13 @@ fit <- with(dt_imputed, pim(p_mri_d2_fract_lesion_right ~ site +
                               enro_sex + clot_length + txas_reperfusion))
 
 pim_results$imputation_mi$overall <- tmp <-
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
+
+tables$pim$imputation_mi$overall$clot_length <-
+  extract_clot_length(tmp)
 
 tables$pim$imputation_mi$overall$full_output <- format_full_output(tmp)
 
@@ -879,11 +942,23 @@ tmp.pval <- tmp |>
   select(variable, pvalue)
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
-plots$pim$imputation_mi$overall <- 
-  plot_sig(data = dt,
-           y = p_mri_d2_fract_lesion_right, 
-           ylabel = ylabel, 
-           p_values = pvalue_treatment)
+plots$pim$imputation_mi$overall$txas_reperfusion <- 
+  plot_treat_sig(data = dt,
+                 y = p_mri_d2_fract_lesion_right, 
+                 ylabel = ylabel,
+                 p_values = pvalue_treatment)
+
+tmp.pval <- tmp |> 
+  filter(str_detect(variable, "clot_length")) |> 
+  mutate(variable = str_replace(variable, "clot_length", "")) |> 
+  select(variable, pvalue)
+pvalue_treatment = format_pvalue(tmp.pval$pvalue)
+
+plots$pim$imputation_mi$overall$clot_length <- 
+  plot_clot_length_sig(data = dt,
+                       y = p_mri_d2_fract_lesion_right, 
+                       ylabel = ylabel,
+                       p_values = pvalue_treatment)
 
 #### Clot length 3cm ----
 
@@ -891,7 +966,7 @@ fit <- with(dt_imputed_cl3, pim(p_mri_d2_fract_lesion_right ~ site +
                                   enro_sex + txas_reperfusion))
 
 pim_results$imputation_mi$cl3 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$cl3$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -907,7 +982,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_mi$cl3 <- 
-  plot_sig(data = dt_cl3,
+  plot_treat_sig(data = dt_cl3,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
@@ -918,7 +993,7 @@ fit <- with(dt_imputed_cl4, pim(p_mri_d2_fract_lesion_right ~ site +
                                   enro_sex + txas_reperfusion))
 
 pim_results$imputation_mi$cl4 <- tmp <- 
-  nt_multiple_pim(fit, oneminus = TRUE, mi = TRUE)
+  nt_multiple_pim(fit, mi = TRUE)
 
 tables$pim$imputation_mi$cl4$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
@@ -934,7 +1009,7 @@ tmp.pval <- tmp |>
 pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_mi$cl4 <- 
-  plot_sig(data = dt_cl4,
+  plot_treat_sig(data = dt_cl4,
            y = p_mri_d2_fract_lesion_right, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
