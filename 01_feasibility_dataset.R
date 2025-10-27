@@ -9,6 +9,7 @@ subDir <- "data_checks"
 if (!dir.exists(file.path(subDir))) {
   dir.create(file.path(subDir))
 }
+save <- FALSE
 
 
 
@@ -251,6 +252,8 @@ dt_feasibility$enrolled <- aux |>
 
 tmp <- dt_feasibility$enrolled %>% 
   select(enro_animal_id)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_enrolled ", Sys.Date(), ".csv"))
 
 dt_feasibility$ineligible_for_randomization <- aux |> 
@@ -260,6 +263,8 @@ dt_feasibility$ineligible_for_randomization <- aux |>
 
 tmp <- dt_feasibility$ineligible_for_randomization %>% 
   select(enro_animal_id, rand_conduct, rand_conduct_rsn_oth)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_ineligible_for_randomization ", Sys.Date(), ".csv"))
 
 
@@ -271,6 +276,8 @@ dt_feasibility$itt <- aux |>
 
 tmp <- dt_feasibility$itt %>% 
   select(enro_animal_id, rand_conduct)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_itt", Sys.Date(), ".csv"))
 
 dt_feasibility$exclusion_from_treatment <- aux |>
@@ -282,6 +289,8 @@ dt_feasibility$exclusion_from_treatment <- aux |>
 tmp <- dt_feasibility$exclusion_from_treatment %>% 
   select(enro_animal_id, rand_conduct, 
          srg_conduct, srg_conduct_rsn, srg_conduct_rsn_oth,)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_exclusion_from_treatment ", Sys.Date(), ".csv"))
 
 dt_feasibility$procedural_dropout <- aux |>
@@ -298,6 +307,8 @@ dt_feasibility$procedural_dropout <- aux |>
 tmp <- dt_feasibility$procedural_dropout %>%
   select(enro_animal_id, rand_conduct, srg_conduct,
          successful_surgery, contains("comments"))
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_procedural_dropout ", Sys.Date(), ".csv"))
 
 dt_feasibility$mitt <- aux |>
@@ -331,6 +342,8 @@ tmp <- dt_feasibility$mitt %>%
   select(enro_animal_id, 
          rand_conduct, srg_conduct, successful_surgery, 
          txas_reperfusion, rand_clot_length)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_mitt ", Sys.Date(), ".csv"))
 
 
@@ -349,6 +362,8 @@ tmp <- dt_feasibility$partial_treatment %>%
   select(enro_animal_id, 
          rand_conduct, srg_conduct,  successful_surgery,
          rand_reperfusion_dose, srg_reperfsn_dose, full_dose)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_partial_treatment ", Sys.Date(), ".csv"))
 
 
@@ -386,6 +401,8 @@ tmp <- dt_feasibility$pp %>%
          successful_surgery, 
          txas_reperfusion_actual, 
          srg_clot_length)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_per_protocol ", Sys.Date(), ".csv"))
 
 dt_feasibility$loss_followup <- aux |>
@@ -424,6 +441,8 @@ tmp <- dt_feasibility$loss_followup %>%
          txas_reperfusion_actual, 
          srg_clot_length,
          eos_day_diff_srg_death)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_loss_followup ", Sys.Date(), ".csv"))
 
 
@@ -463,6 +482,8 @@ tmp <- dt_feasibility$full_data %>%
          txas_reperfusion_actual, 
          srg_clot_length,
          eos_day_diff_srg_death)
+
+if (save)
 write.csv(tmp, paste0("data_checks/id_full_data ", Sys.Date(), ".csv"))
 
 dt_feasibility$comp_mitt <- aux |>
