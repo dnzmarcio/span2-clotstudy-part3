@@ -1683,18 +1683,27 @@ plot_summary <- function(list, comparison = "treatment"){
       df <- list[[.x]]
       
       pi_str <- df[["PI (95% CI)"]]
-      pval <- df[["p value"]]
+      pval_raw <- df[["p value"]]
       
-      # Extract numeric values from the PI string
+      # Extract numbers from PI
       parts <- str_match(pi_str, "([0-9.]+) \\(([0-9.]+); ([0-9.]+)\\)")
+      
+      # Handle p-value formatting
+      if (is.character(pval_raw) && str_detect(pval_raw, "<")) {
+        pval_label <- pval_raw
+        pval_num <- as.numeric(str_remove(pval_raw, "<\\s*"))
+      } else {
+        pval_num <- as.numeric(pval_raw)
+        pval_label <- pvalue(pval_num, prefix = c("< ", "", ""))
+      }
       
       data.frame(
         group = .x,
         estimate = as.numeric(parts[2]),
         lower = as.numeric(parts[3]),
         upper = as.numeric(parts[4]),
-        pval_num = as.numeric(pval),
-        pval_label = pvalue(as.numeric(pval), prefix = c("< ", "", ""))
+        pval_num = pval_num,
+        pval_label = pval_label
       )
     }) |> as.data.frame()
 
