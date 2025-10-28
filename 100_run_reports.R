@@ -326,30 +326,30 @@ quarto_render(input = "22_report_d30_bederson_nds_analysis_pp.qmd",
 source("23_weight_mitt.R")
 quarto_render(input = "report_weight_analysis_mitt.qmd",
               output_file = paste0("reports/report_weight_analysis_mitt ",
-                                   Sys.Date(), ".html"))   
-#### FT analysis
+                                   Sys.Date(), ".html"))
+#### PP analysis
 
 source("23_weight_ft.R") ----
 quarto_render(input = "report_weight_analysis_ft.qmd",
               output_file = paste0("reports/report_weight_analysis_ft ",
-                                   Sys.Date(), ".html")) 
+                                   Sys.Date(), ".html"))
 
-### Clot Draw ----
-
-#### mITT analysis ----
-
-source("24_clot_draw_analysis_mitt.R")
-quarto_render(input = "report_clot_draw_analysis_mitt.qmd",
-              output_file = paste0("reports/report_clot_draw_analysis_mitt ",
-                                   Sys.Date(), ".html"))  
-
-source("24_clot_draw_analysis_ft.R")
-quarto_render(input = "report_clot_draw_analysis_ft.qmd",
-              output_file = paste0("reports/report_clot_draw_analysis_ft ",
-                                   Sys.Date(), ".html"))  
-
-### Combined plots ----
-quarto_render(input = "report_combined_plots.qmd",
-              output_file = paste0("reports/report_combined_plots_mitt ",
-                                   Sys.Date(), ".html"))  
+# ### Clot Draw ----
+# 
+# #### mITT analysis ----
+# 
+# source("24_clot_draw_analysis_mitt.R")
+# quarto_render(input = "report_clot_draw_analysis_mitt.qmd",
+#               output_file = paste0("reports/report_clot_draw_analysis_mitt ",
+#                                    Sys.Date(), ".html"))  
+# 
+# source("24_clot_draw_analysis_ft.R")
+# quarto_render(input = "report_clot_draw_analysis_ft.qmd",
+#               output_file = paste0("reports/report_clot_draw_analysis_ft ",
+#                                    Sys.Date(), ".html"))  
+# 
+# ### Combined plots ----
+# quarto_render(input = "report_combined_plots.qmd",
+#               output_file = paste0("reports/report_combined_plots_mitt ",
+#                                    Sys.Date(), ".html"))  
 
