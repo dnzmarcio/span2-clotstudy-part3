@@ -317,13 +317,13 @@ gt(tab) |>
 ::: {.panel-tabset}
 ###### Treatment
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$noimputation$overall$txas_reperfusion
 ```
 
 ###### Clot Length
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$noimputation$overall$clot_length
 ```
 :::
@@ -357,7 +357,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$noimputation$cl3
 ```
 
@@ -390,7 +390,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$noimputation$cl4
 ```
 
@@ -440,13 +440,13 @@ gt(tab) |>
 ::: {.panel-tabset}
 ###### Treatment
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_overall$overall$txas_reperfusion
 ```
 
 ###### Clot Length
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_overall$overall$clot_length
 ```
 :::
@@ -480,7 +480,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_overall$cl3
 ```
 
@@ -513,7 +513,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_overall$cl4
 ```
 
@@ -563,13 +563,13 @@ gt(tab) |>
 ::: {.panel-tabset}
 ###### Treatment
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_cls$overall$txas_reperfusion
 ```
 
 ###### Clot Length
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_cls$overall$clot_length
 ```
 :::
@@ -604,7 +604,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_cls$cl3
 ```
 
@@ -637,7 +637,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_cls$cl4
 ```
 
@@ -687,13 +687,13 @@ gt(tab) |>
 ::: {.panel-tabset}
 ###### Treatment
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_clst$overall$txas_reperfusion
 ```
 
 ###### Clot Length
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_clst$overall$clot_length
 ```
 :::
@@ -727,7 +727,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_clst$cl3
 ```
 
@@ -760,7 +760,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_ws_clst$cl4
 ```
 
@@ -810,13 +810,13 @@ gt(tab) |>
 ::: {.panel-tabset}
 ###### Treatment
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_mi$overall$txas_reperfusion
 ```
 
 ###### Clot Length
 
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_mi$overall$clot_length
 ```
 :::
@@ -850,7 +850,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_mi$cl3
 ```
 
@@ -883,7 +883,7 @@ gt(tab) |>
 ```
 
 ##### Plot
-```{r}
+```{r fig.width=5, fig.height=5}
 plots$pim$imputation_mi$cl4
 ```
 
@@ -892,6 +892,40 @@ plots$pim$imputation_mi$cl4
 ```{r}
 tab <- tables$pim$imputation_mi$cl4$full_output
 gt(tab) 
+```
+
+:::
+
+### Summary
+
+::: {.panel-tabset}
+
+#### Overall
+
+::: {.panel-tabset}
+
+##### Treatment
+```{r}
+plots$summary$tx$overall
+```
+
+##### Clot Length
+```{r}
+plots$summary$clot_length$overall
+```
+
+:::
+
+#### CL3
+
+```{r}
+plots$summary$cl3
+```
+
+#### CL4
+
+```{r}
+plots$summary$cl4
 ```
 
 :::
