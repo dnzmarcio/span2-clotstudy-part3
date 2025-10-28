@@ -26,6 +26,9 @@ library(marginaleffects)
 library(mice)
 library(hms)
 library(cowplot)
+library(ggbeeswarm)
+library(ggtext)
+library(ggprism)
 
 
 # Data ----
@@ -52,7 +55,7 @@ mi_late_variables <- c('srg_weight', 'srg_animal_age',
 options(scipen = 999)
 
 # Color Palette ----
-colors <- palette.colors(palette = "Set1")
+colors <- palette.colors(palette = "Set1") 
 
 # Helpful Functions ----
 
@@ -345,7 +348,7 @@ plot_db <- function(statistic, route){
     out <- ggplot(dp_limits_ip, aes(x = stage, y = limits)) +
       geom_point() + 
       geom_line(aes(group = type), linetype = 2) + 
-      theme_bw() +
+      theme_prism() +
       scale_x_continuous("Stage", breaks = 1:4) +
       labs(y = "Test statistic") +
       geom_text(aes(label = label), nudge_x = 0.1, size = 5) +
@@ -373,7 +376,7 @@ plot_db <- function(statistic, route){
     out <- ggplot(dp_limits_iv, aes(x = stage, y = limits)) +
       geom_point() + 
       geom_line(aes(group = type), linetype = 2) + 
-      theme_bw() +
+      theme_prism() +
       scale_x_continuous("Stage", breaks = 1:4) +
       labs(y = "Test statistic") +
       geom_text(aes(label = label), nudge_x = 0.1, size = 5) +
@@ -400,7 +403,7 @@ plot_treat <- function(data, y, ylabel,
   } else {
     index <- c(1, 2, 3, 4, 7, 9, 6) #c(1, 2, 3, 4, 7, 9, 6, 8)
   }
-  
+
   tmp <- as.character(colors[index])
   
   if(is.null(lower) & is.null(upper)){
@@ -456,7 +459,7 @@ plot_treat_bar <- function(data, y, ylabel){
       y = "Percentage (%)",
       fill = ylabel
     ) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual(ylabel, values = tmp) +
     theme(
       axis.title.x = element_text(size = 13),
@@ -805,7 +808,7 @@ plot_clotlength_interaction <-
                  outlier.shape = NA) +
     labs(x = "Clot Length", y = ylabel, 
          caption = glue("p-value for interaction {pvalue}")) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual("Treatment", values = tmp) +
     theme(legend.position = "top",
           axis.title.y = element_text(size = 13),
@@ -867,7 +870,7 @@ plot_clotlength_stackedbar_interaction <-
               position=position_stack(vjust=0.5),
               size = size_perc
     ) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual(ylabel, values = tmp,
                       guide = guide_legend(reverse = TRUE)
     ) +
@@ -1050,7 +1053,7 @@ plot_enro_model <- function(data, y, ylabel, lower = NULL, upper = NULL){
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
     labs(x = "Treatment", y = ylabel) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual("Treatment", values = tmp) +
     theme(legend.position = "top",
           axis.title.y = element_text(size = 13),
@@ -1092,7 +1095,7 @@ plot_enro_model_bar <- function(data, y, ylabel){
       y = "Percentage (%)",
       fill = ylabel
     ) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual(ylabel, values = tmp) +
     theme(
       axis.title.x = element_text(size = 13),
@@ -1148,7 +1151,7 @@ plot_enro_model_stackedbar <- function(data, y, ylabel, size_perc = 4){
               position=position_stack(vjust=0.5),
               size = size_perc
     ) +
-    theme_bw(base_size = 15) +
+    theme_prism(base_size = 15) +
     scale_fill_manual(ylabel, values = tmp,
                       guide = guide_legend(reverse = TRUE)
     ) +
@@ -1341,7 +1344,7 @@ plot_pi <- function(list, route, oneminus){
     annotate("text", x = 0.95, y = (nrow(dp) + 0.5), label = "p value")+
     scale_x_continuous(limits = c(0, 1)) +
     labs(x = "Probabilistic Index", y = "") +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     theme(legend.position = "none")
 }
 
@@ -1433,7 +1436,7 @@ plot_treat_sig <- function(data, y, ylabel, p_values,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
     labs(x = "Treatment", y = ylabel) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual("Treatment", values = tmp) +
     theme(legend.position = "top",
           axis.title.y = element_text(size = 14),
@@ -1477,7 +1480,7 @@ plot_clot_length_sig <- function(data, y, ylabel, p_values,
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1)) +
     labs(x = "Clot Length", y = ylabel) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual("Clot Length", values = tmp) +
     theme(legend.position = "top",
           axis.title.y = element_text(size = 14),
@@ -1548,7 +1551,7 @@ plot_treat_sig_bar <- function(data, y, ylabel, p_values,
               position=position_stack(vjust=0.5),
               size = size_perc
     ) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual(ylabel, values = tmp, 
                       guide = guide_legend(reverse = TRUE)
     ) +
@@ -1628,7 +1631,7 @@ plot_clot_length_sig_bar <- function(data, y, ylabel, p_values,
               position=position_stack(vjust=0.5),
               size = size_perc
     ) +
-    theme_bw(base_size = 16) +
+    theme_prism(base_size = 16) +
     scale_fill_manual(ylabel, values = tmp, 
                       guide = guide_legend(reverse = TRUE)
     ) +
@@ -1672,6 +1675,86 @@ round_percentages <- function(x, digits = 10) {
   x_floor[add_index] <- x_floor[add_index] + 1 / multiplier
   
   return(x_floor)
+}
+
+plot_summary <- function(list, comparison = "treatment"){
+  
+    dp <- map_dfr(names(list), ~{
+      df <- list[[.x]]
+      
+      pi_str <- df[["PI (95% CI)"]]
+      pval <- df[["p value"]]
+      
+      # Extract numeric values from the PI string
+      parts <- str_match(pi_str, "([0-9.]+) \\(([0-9.]+); ([0-9.]+)\\)")
+      
+      data.frame(
+        group = .x,
+        estimate = as.numeric(parts[2]),
+        lower = as.numeric(parts[3]),
+        upper = as.numeric(parts[4]),
+        pval_num = as.numeric(pval),
+        pval_label = pvalue(as.numeric(pval), prefix = c("< ", "", ""))
+      )
+    }) |> as.data.frame()
+
+  dp <- dp |>
+    mutate(group = factor(group,
+                          levels = c("noimputation","imputation_ws_overall","imputation_ws_cls","imputation_ws_clst","imputation_mi"),
+                          labels = c("No Imputation","Worst Score Overall","Worst Score CLS","Worst Score CLST","Multiple Imputation")))
+  
+  # define final order 
+  y_levels <- c("No Imputation","Worst Score Overall","Worst Score CLS","Worst Score CLST","Multiple Imputation")
+
+  # assign to factor
+  dp$group <- factor(as.character(dp$group), levels = y_levels)
+  
+  if (comparison == "treatment"){
+    main_label = "TNKase"
+  } else {
+    main_label = "3cm"
+  }
+  # ggplot
+  ggplot(dp, aes(x = estimate, y = group)) +
+    geom_point(size = 3, na.rm = TRUE, color = "black") +
+    geom_errorbarh(aes(xmin = lower, xmax = upper), orientation = "y",
+                   color = "black", height = 0.3, linewidth = 1, 
+                   na.rm = TRUE) +
+    geom_vline(xintercept = 0.5, linetype = 2) +
+    geom_text(
+      aes(label = pval_label, color = pval_num <= 0.05),
+      x = 0.95, size = 4, na.rm = TRUE
+    ) +
+    scale_color_manual(values = c(`TRUE` = "#E41A1C", `FALSE` = "black"), guide = "none") +
+    annotate("text", x = 0.95, y = length(y_levels) + 0.4, label = "p value", size = 4) +
+    scale_y_discrete(limits = rev(y_levels),  # reverse order here
+                     drop = FALSE) +
+    scale_x_continuous(limits = c(0, 1)) +
+    labs(x = "Probabilistic Index", y = "") +
+    theme_prism(base_size = 16) +   
+    theme(legend.position = "none",
+          axis.text.y = element_text(size = 14),
+          axis.text.x = element_text(size = 14),
+          plot.margin = ggplot2::margin(t = 40, r = 10, b = 10, l = 10)) +
+    coord_cartesian(clip = "off") +
+    #arrow + label above plot 
+    # arrow line in npc (relative) coordinates
+    annotation_custom(
+      grob = grid::linesGrob(
+        x = grid::unit(c(0.5, 0.7), "npc"),  
+        y = grid::unit(1.05, "npc"),          # just above the panel
+        arrow = grid::arrow(type = "closed", length = grid::unit(6, "pt")),
+        gp = grid::gpar(lwd = 2, fill = "black", col = "black")
+      )
+    ) +
+    annotation_custom(
+      grob = grid::textGrob(
+        paste(main_label, " better"),
+        x = grid::unit(0.72, "npc"),  # just after arrow
+        y = grid::unit(1.05, "npc"),
+        hjust = 0, gp = grid::gpar(cex = 0.9, col = "#E41A1C")
+      )
+    )
 }
 # Blurbs ----
 
