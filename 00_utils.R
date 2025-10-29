@@ -414,7 +414,7 @@ plot_treat <- function(data, y, ylabel,
   }
   ggplot(data, aes(x = txas_reperfusion, y = {{y}},
                    fill = txas_reperfusion)) +
-    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
@@ -555,7 +555,7 @@ plot_sex <- function(data, y, ylabel,
   
   ggplot(data, aes(x = txas_reperfusion, y = {{y}},
                    fill = txas_reperfusion)) +
-    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
@@ -693,7 +693,7 @@ plot_clotlength <- function(data, y, ylabel,
   
   ggplot(data, aes(x = txas_reperfusion, y = {{y}},
                    fill = txas_reperfusion)) +
-    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
@@ -904,7 +904,7 @@ plot_site <- function(data, y, ylabel, lower = NULL, upper = NULL){
   
   ggplot(data, aes(x = txas_reperfusion, y = {{y}},
                    fill = txas_reperfusion)) +
-    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
@@ -1046,7 +1046,7 @@ plot_enro_model <- function(data, y, ylabel, lower = NULL, upper = NULL){
   
   ggplot(data, aes(x = txas_reperfusion, y = {{y}},
                    fill = txas_reperfusion)) +
-    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
@@ -1429,7 +1429,7 @@ plot_treat_sig <- function(data, y, ylabel, p_values,
   
   ggplot(data, aes(x = txas_reperfusion, y = {{y}},
                    fill = txas_reperfusion)) +
-    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = txas_reperfusion), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
@@ -1474,7 +1474,7 @@ plot_clot_length_sig <- function(data, y, ylabel, p_values,
   
   ggplot(data, aes(x = clot_length, y = {{y}},
                    fill = clot_length)) +
-    geom_beeswarm(aes(fill = clot_length), shape = 21, size = 2, cex = 1.5) +
+    geom_beeswarm(aes(fill = clot_length), shape = 21, size = 2, cex = 2) +
     geom_boxplot(width=0.2, alpha=0.2,
                  position = position_dodge(width = 1),
                  outlier.shape = NA) +
