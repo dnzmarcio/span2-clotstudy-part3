@@ -351,7 +351,7 @@ file.rename(fname, file.path("reports", fname))
 source("23_weight_mitt.R")
 
 fname <- paste0("report_weight_analysis_mitt ",Sys.Date(), ".html")
-quarto_render(input = "report_weight_analysis_mitt.qmd",output_file = fname)
+quarto_render(input = "23_report_weight_analysis_mitt.qmd",output_file = fname)
 file.rename(fname, file.path("reports", fname))
 
 #### PP analysis
@@ -359,7 +359,7 @@ file.rename(fname, file.path("reports", fname))
 source("23_weight_ft.R") 
 
 fname <- paste0("report_weight_analysis_ft ", Sys.Date(), ".html")
-quarto_render(input = "report_weight_analysis_ft.qmd", output_file = fname)
+quarto_render(input = "23_report_weight_analysis_ft.qmd", output_file = fname)
 file.rename(fname, file.path("reports", fname))
 
 # ### Clot Draw ----
