@@ -324,14 +324,14 @@ quarto_render(input = "22_report_d30_bederson_nds_analysis_pp.qmd",
 #### mITT analysis ----
 
 source("23_weight_mitt.R")
-quarto_render(input = "report_weight_analysis_mitt.qmd",
+quarto_render(input = "23_report_weight_analysis_mitt.qmd",
               output_file = paste0("report_weight_analysis_mitt ",
                                    Sys.Date(), ".html"))
 #### PP analysis
 
-source("23_weight_ft.R") ----
-quarto_render(input = "report_weight_analysis_ft.qmd",
-              output_file = paste0("report_weight_analysis_ft ",
+source("23_weight_pp.R") 
+quarto_render(input = "23_report_weight_analysis_pp.qmd",
+              output_file = paste0("report_weight_analysis_pp ",
                                    Sys.Date(), ".html"))
 
 # ### Clot Draw ----
