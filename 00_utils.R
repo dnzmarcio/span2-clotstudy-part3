@@ -863,7 +863,7 @@ plot_clotlength_stackedbar_interaction <-
       x = "Treatment Group and Clot Length",
       y = "Percentage (%)",
       fill = ylabel, 
-      caption = glue("p-value for interaction {pvalue}")
+      caption = glue("p-value for interaction = {pvalue}")
     ) +
     geom_text(data = dt_sum_complete %>% filter(perc_value != 0),
               aes(label=paste0(sprintf("%1.1f", perc_value),"%")),
@@ -1584,11 +1584,11 @@ plot_clot_length_sig_bar <- function(data, y, ylabel, p_values,
                                            size_perc = 4) {
   
   dt_sum <- data %>%
-    select(txas_reperfusion, {{y}}) |>
+    select(clot_length, {{y}}) |>
     na.omit() |>
-    group_by(txas_reperfusion, {{y}}) %>%
+    group_by(clot_length, {{y}}) %>%
     summarise(count = n(), .groups = "drop") %>%
-    group_by(txas_reperfusion) %>%
+    group_by(clot_length) %>%
     mutate(perc_value = (count / sum(count)) * 100)
   
   upper_max = 100
@@ -1596,14 +1596,14 @@ plot_clot_length_sig_bar <- function(data, y, ylabel, p_values,
   upper_sig = c(upper_max + 6)
   upper_lim <- upper_max + 6
   comparisons <- list(
-    c("Control", "TNKase"))
+    c("3", "4"))
   
   
   # Ensure all combinations of txas_reperfusion and postop_d1_nds_score exist
   dt_sum_complete <- dt_sum |>
     ungroup() |>
     mutate({{y}} := factor({{y}}, levels = c(4, 3, 2, 1, 0))) |>
-    complete(txas_reperfusion, {{y}},
+    complete(clot_length, {{y}},
              fill = list(perc_value = 0),
              explicit = TRUE) 
   
@@ -1618,11 +1618,11 @@ plot_clot_length_sig_bar <- function(data, y, ylabel, p_values,
     "0" = "#CACACA"   
   ))
   
-  g <- ggplot(dt_sum_complete, aes(x = txas_reperfusion, y = perc_value,
+  g <- ggplot(dt_sum_complete, aes(x = clot_length, y = perc_value,
                                    fill = {{y}})) +
     geom_col(position = "stack", width = 0.8) +
     labs(
-      x = "Treatment Group",
+      x = "Clot Length",
       y = "Percentage (%)",
       fill = ylabel
     ) +
