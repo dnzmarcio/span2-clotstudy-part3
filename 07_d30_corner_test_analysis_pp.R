@@ -750,7 +750,7 @@ nt_multiple_pim(fit)
 tables$pim$imputation_ws_overall$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
 
-tables$pim$noimputation$overall$clot_length <-
+tables$pim$imputation_ws_overall$overall$clot_length <-
   extract_clot_length(tmp)
 
 tables$pim$imputation_ws_overall$overall$full_output <- format_full_output(tmp)
@@ -887,7 +887,7 @@ nt_multiple_pim(fit)
 tables$pim$imputation_ws_cls$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
 
-tables$pim$noimputation$overall$clot_length <-
+tables$pim$imputation_ws_cls$overall$clot_length <-
   extract_clot_length(tmp)
 
 tables$pim$imputation_ws_cls$overall$full_output <- format_full_output(tmp)
@@ -1023,7 +1023,7 @@ nt_multiple_pim(fit)
 tables$pim$imputation_ws_clst$overall$txas_reperfusion <-
   extract_treatment(tmp, oneminus = TRUE)
 
-tables$pim$noimputation$overall$clot_length <-
+tables$pim$imputation_ws_clst$overall$clot_length <-
   extract_clot_length(tmp)
 
 tables$pim$imputation_ws_clst$overall$full_output <- format_full_output(tmp)
