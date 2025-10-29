@@ -277,77 +277,90 @@ file.rename(fname, file.path("reports", fname))
 #### mITT analysis ----
 
 source("19_mortality_analysis_mitt.R")
-quarto_render(input = "19_report_mortality_analysis_mitt.qmd",
-              output_file = paste0("report_mortality_analysis_mitt ",
-                                   Sys.Date(), ".html"))
+
+fname <- paste0("report_mortality_analysis_mitt ", Sys.Date(), ".html")
+quarto_render(input = "19_report_mortality_analysis_mitt.qmd", output_file = fname)
+file.rename(fname, file.path("reports", fname))
+
 #### FT analysis -----
 
 source("19_mortality_analysis_pp.R")
-quarto_render(input = "19_report_mortality_analysis_pp.qmd",
-              output_file = paste0("report_mortality_analysis_ft ",
-                                   Sys.Date(), ".html"))              
+
+fname <- paste0("report_mortality_analysis_ft ", Sys.Date(), ".html")
+quarto_render(input = "19_report_mortality_analysis_pp.qmd", output_file = fname)  
+file.rename(fname, file.path("reports", fname))
 
 ### Bederson Neurodeficit score at day 1 ----
 
 #### mITT analysis ----
 
 source("20_bederson_nds_d1_analysis_mitt.R")
-quarto_render(input = "20_report_d1_bederson_nds_analysis_mitt.qmd",
-              output_file = paste0("report_d1_bederson_nds_analysis_mitt ",
-                                   Sys.Date(), ".html"))   
+
+fname <- paste0("report_d1_bederson_nds_analysis_mitt ", Sys.Date(), ".html")
+quarto_render(input = "20_report_d1_bederson_nds_analysis_mitt.qmd", output_file = fname)   
+file.rename(fname, file.path("reports", fname))
+
 #### FT analysis ----
 
 source("20_bederson_nds_d1_analysis_pp.R")
-quarto_render(input = "20_report_d1_bederson_nds_analysis_pp.qmd",
-              output_file = paste0("report_d1_bederson_nds_analysis_pp ",
-                                   Sys.Date(), ".html"))       
+
+fname <- paste0("report_d1_bederson_nds_analysis_pp ",Sys.Date(), ".html")
+quarto_render(input = "20_report_d1_bederson_nds_analysis_pp.qmd", output_file = fname)  
+file.rename(fname, file.path("reports", fname))
 
 ### Bederson Neurodeficit score at day 2 ----
 
 #### mITT analysis ----
 
 source("21_bederson_nds_d2_analysis_mitt.R")
-quarto_render(input = "21_report_d2_bederson_nds_analysis_mitt.qmd",
-              output_file = paste0("report_d2_bederson_nds_analysis_mitt ",
-                                   Sys.Date(), ".html"))   
+
+fname <- paste0("report_d2_bederson_nds_analysis_mitt ", Sys.Date(), ".html")
+quarto_render(input = "21_report_d2_bederson_nds_analysis_mitt.qmd", output_file = fname)  
+file.rename(fname, file.path("reports", fname))
+
 #### FT analysis ----
 
 source("21_bederson_nds_d2_analysis_pp.R")
-quarto_render(input = "21_report_d2_bederson_nds_analysis_pp.qmd",
-              output_file = paste0("report_d2_bederson_nds_analysis_pp ",
-                                   Sys.Date(), ".html"))  
 
+fname <- paste0("report_d2_bederson_nds_analysis_pp ", Sys.Date(), ".html")
+quarto_render(input = "21_report_d2_bederson_nds_analysis_pp.qmd", output_file = fname)  
+file.rename(fname, file.path("reports", fname))
 
 ### Bederson Neurodeficit score at day 30 ----
 
 #### mITT analysis ----
 
 source("22_bederson_nds_d30_analysis_mitt.R")
-quarto_render(input = "22_report_d30_bederson_nds_analysis_mitt.qmd",
-              output_file = paste0("report_d30_bederson_nds_analysis_mitt ",
-                                   Sys.Date(), ".html"))   
+
+fname <- paste0("report_d30_bederson_nds_analysis_mitt ",Sys.Date(), ".html")
+quarto_render(input = "22_report_d30_bederson_nds_analysis_mitt.qmd",output_file = fname) 
+file.rename(fname, file.path("reports", fname))
+
 #### FT analysis
 
 source("22_bederson_nds_d30_analysis_pp.R")
-quarto_render(input = "22_report_d30_bederson_nds_analysis_pp.qmd",
-              output_file = paste0("report_d30_bederson_nds_analysis_pp ",
-                                   Sys.Date(), ".html"))              
 
+fname <- paste0("report_d30_bederson_nds_analysis_pp ",Sys.Date(), ".html")
+quarto_render(input = "22_report_d30_bederson_nds_analysis_pp.qmd", output_file = fname) 
+file.rename(fname, file.path("reports", fname))
 
 ### Weight ----
 
 #### mITT analysis ----
 
 source("23_weight_mitt.R")
-quarto_render(input = "report_weight_analysis_mitt.qmd",
-              output_file = paste0("reports/report_weight_analysis_mitt ",
-                                   Sys.Date(), ".html"))
+
+fname <- paste0("report_weight_analysis_mitt ",Sys.Date(), ".html")
+quarto_render(input = "report_weight_analysis_mitt.qmd",output_file = fname)
+file.rename(fname, file.path("reports", fname))
+
 #### PP analysis
 
-source("23_weight_ft.R") ----
-quarto_render(input = "report_weight_analysis_ft.qmd",
-              output_file = paste0("reports/report_weight_analysis_ft ",
-                                   Sys.Date(), ".html"))
+source("23_weight_ft.R") 
+
+fname <- paste0("report_weight_analysis_ft ", Sys.Date(), ".html")
+quarto_render(input = "report_weight_analysis_ft.qmd", output_file = fname)
+file.rename(fname, file.path("reports", fname))
 
 # ### Clot Draw ----
 # 
