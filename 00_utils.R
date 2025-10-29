@@ -1270,8 +1270,8 @@ extract_clot_length <- function(list, oneminus = FALSE){
     select(-coef, -se) %>%
     rename(group = variable, estimate = prob_index) %>%
     mutate(group = case_when(
-      oneminus == TRUE ~ str_c(str_replace(group, "clot_length", ""), " < 3cm"),
-      oneminus == FALSE ~ str_c("3cm < ", str_replace(group, "clot_length", ""))
+      oneminus == TRUE ~ str_c(str_replace(group, "clot_length", ""), "cm < 3cm"),
+      oneminus == FALSE ~ str_c("3cm < ", str_replace(group, "clot_length", ""), "cm")
       
     )) 
   
@@ -1767,7 +1767,8 @@ plot_summary <- function(list, comparison = "treatment"){
         paste(main_label, " better"),
         x = grid::unit(0.72, "npc"),  # just after arrow
         y = grid::unit(1.05, "npc"),
-        hjust = 0, gp = grid::gpar(cex = 0.9, col = "#E41A1C")
+        hjust = 0, gp = grid::gpar(cex = 0.9, col = "black",
+                                   fontface = "bold")
       )
     )
 }
