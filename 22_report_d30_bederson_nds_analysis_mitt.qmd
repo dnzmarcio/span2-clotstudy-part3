@@ -872,32 +872,6 @@ plots$pim$imputation_mi$overall$clot_length
 ```
 :::
 
-#### Overall
-
-```{r}
-tab <- tables$pim$imputation_mi$overall$txas_reperfusion 
-gt(tab) |> 
-  tab_header(
-    title = "Relative Effect - Probabilistic Index Model"
-  ) |>
-  tab_footnote(
-    footnote = footnote$ci,
-    locations = cells_column_labels(columns = "PI (95% CI)")
-  ) |>
-  tab_footnote(
-    footnote = footnote$pvals,
-    locations = cells_column_labels(columns = "p value")
-  ) |>
-  tab_footnote(
-    footnote = footnote$pi
-  )
-```
-
-##### Plot
-```{r}
-plots$pim$imputation_mi$overall
-```
-
 ##### Full Output
 
 ```{r}
@@ -970,6 +944,41 @@ plots$pim$imputation_mi$cl4
 tab <- tables$pim$imputation_mi$cl4$full_output
 gt(tab) 
 ```
+
+:::
+
+### Summary
+
+::: {.panel-tabset}
+
+#### Overall
+
+::: {.panel-tabset}
+
+##### Treatment
+```{r}
+plots$summary$tx$overall
+```
+
+##### Clot Length
+```{r}
+plots$summary$clot_length$overall
+```
+
+:::
+
+#### CL3
+
+```{r}
+plots$summary$cl3
+```
+
+#### CL4
+
+```{r}
+plots$summary$cl4
+```
+
 
 :::
 
