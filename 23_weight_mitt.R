@@ -184,7 +184,7 @@ aux <-   dp |>
 plots$cl4$txas_reperfusion <- aux$perc_weight$plot + aux$perc_weight$n.table + 
   plot_layout(nrow = 2, heights = c(0.8, 0.2))
 
-## Plot Length ---
+## Clot Length ----
 
 aux <-   dp |> 
   select(time, perc_weight, clot_length) |>
