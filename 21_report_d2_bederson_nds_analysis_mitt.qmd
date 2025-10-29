@@ -946,4 +946,39 @@ gt(tab)
 
 :::
 
+### Summary
+
+::: {.panel-tabset}
+
+#### Overall
+
+::: {.panel-tabset}
+
+##### Treatment
+```{r}
+plots$summary$tx$overall
+```
+
+##### Clot Length
+```{r}
+plots$summary$clot_length$overall
+```
+
+:::
+
+#### CL3
+
+```{r}
+plots$summary$cl3
+```
+
+#### CL4
+
+```{r}
+plots$summary$cl4
+```
+
+
+:::
+
 :::

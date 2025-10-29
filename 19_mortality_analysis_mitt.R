@@ -118,7 +118,7 @@ plots$txas_reperfusion$overall$all_days <-
              xlab = "Time (days)",
              legend.labs = c("Control", "TNKase"),
              pval = paste0("p = ",pvalue(pval.log_rank_test, prefix = c("< ", "", "")))
-  )
+  ) 
 
 plots$txas_reperfusion$overall$seven_days <- 
   ggsurvplot(fit,

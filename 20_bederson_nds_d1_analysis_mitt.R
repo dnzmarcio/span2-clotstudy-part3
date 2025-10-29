@@ -11,6 +11,7 @@ tables <- list()
 plots <- list()
 statistics <- list()
 pim_results <- list()
+tmp_summary <- list()
 
 ylabel <- "Bederson Neurodeficit score at Day 1"
 
@@ -567,18 +568,6 @@ plots$pim$imputation_ws_overall$cl3 <-
                ylabel = ylabel, 
                p_values = pvalue_treatment)
 
-tmp.pval <- tmp |> 
-  filter(str_detect(variable, "clot_length")) |> 
-  mutate(variable = str_replace(variable, "clot_length", "")) |> 
-  select(variable, pvalue)
-pvalue_treatment = format_pvalue(tmp.pval$pvalue)
-
-plots$pim$noimputation$overall <- 
-  plot_clot_length_sig_bar(data = dt,
-                     y = postop_d1_nds_score, 
-                     ylabel = ylabel, 
-                     p_values = pvalue_treatment)
-
 #### Clot length 4cm ----
 
 fit <- pim(postop_d1_nds_score ~ site + 
@@ -1031,6 +1020,62 @@ plots$pim$imputation_mi$cl4 <-
                ylabel = ylabel, 
                p_values = pvalue_treatment)
 
+
+# Summary ----
+
+## Treatment Overall ----
+
+tmp_summary$tx$overall <- list(
+  noimputation        = tables$pim$noimputation$overall$txas_reperfusion,
+  imputation_ws_overall   = tables$pim$imputation_ws_overall$overall$txas_reperfusion,
+  imputation_ws_cls       = tables$pim$imputation_ws_cls$overall$txas_reperfusion,
+  imputation_ws_clst      = tables$pim$imputation_ws_clst$overall$txas_reperfusion,
+  imputation_mi           = tables$pim$imputation_mi$overall$txas_reperfusion
+)
+
+tmp <- tmp_summary$tx$overall
+
+plots$summary$tx$overall <- plot_summary(tmp, comparison = "treatment")
+
+## Clot Length Overall ----
+
+tmp_summary$clot_length$overall <- list(
+  noimputation        = tables$pim$noimputation$overall$clot_length,
+  imputation_ws_overall   = tables$pim$imputation_ws_overall$overall$clot_length,
+  imputation_ws_cls       = tables$pim$imputation_ws_cls$overall$clot_length,
+  imputation_ws_clst      = tables$pim$imputation_ws_clst$overall$clot_length,
+  imputation_mi           = tables$pim$imputation_mi$overall$clot_length
+)
+
+tmp <- tmp_summary$clot_length$overall
+
+plots$summary$clot_length$overall <- plot_summary(tmp, comparison = "clot_length")
+
+## CL3 ----
+tmp_summary$cl3 <- list(
+  noimputation        = tables$pim$noimputation$cl3$txas_reperfusion,
+  imputation_ws_overall   = tables$pim$imputation_ws_overall$cl3$txas_reperfusion,
+  imputation_ws_cls       = tables$pim$imputation_ws_cls$cl3$txas_reperfusion,
+  imputation_ws_clst      = tables$pim$imputation_ws_clst$cl3$txas_reperfusion,
+  imputation_mi           = tables$pim$imputation_mi$cl3$txas_reperfusion
+)
+
+tmp <- tmp_summary$cl3
+
+plots$summary$cl3 <- plot_summary(tmp, comparison = "treatment")
+
+## CL4 ----
+tmp_summary$cl4 <- list(
+  noimputation        = tables$pim$noimputation$cl4$txas_reperfusion,
+  imputation_ws_overall   = tables$pim$imputation_ws_overall$cl4$txas_reperfusion,
+  imputation_ws_cls       = tables$pim$imputation_ws_cls$cl4$txas_reperfusion,
+  imputation_ws_clst      = tables$pim$imputation_ws_clst$cl4$txas_reperfusion,
+  imputation_mi           = tables$pim$imputation_mi$cl4$txas_reperfusion
+)
+
+tmp <- tmp_summary$cl4 
+
+plots$summary$cl4 <- plot_summary(tmp, comparison = "treatment")
 
 # Saving output ----
 
