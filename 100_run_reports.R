@@ -360,6 +360,24 @@ fname <- paste0("report_weight_analysis_pp ", Sys.Date(), ".html")
 quarto_render(input = "23_report_weight_analysis_pp.qmd", output_file = fname)
 file.rename(fname, file.path("reports", fname))
 
+### Simple SPAN Score ----
+
+##### mITT analysis ----
+
+source("24_simple_span_neuroscore_analysis_mitt.R")
+
+fname <- paste0("report_simple_span_score_mitt ", Sys.Date(), ".html")
+quarto_render(input = "24_report_simple_span_score_mitt.qmd", output_file = fname)
+file.rename(fname, file.path("reports", fname))
+
+##### PP analysis ----
+
+source("24_simple_span_neuroscore_analysis_pp.R")
+
+fname <- paste0("report_simple_span_score_pp ",Sys.Date(), ".html")
+quarto_render(input = "24_report_simple_span_score_pp.qmd", output_file = fname)
+file.rename(fname, file.path("reports", fname))
+
 # ### Clot Draw ----
 # 
 # #### mITT analysis ----
