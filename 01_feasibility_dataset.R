@@ -35,8 +35,12 @@ dataset_behav <-
   select(enro_animal_id, corner_d7_conduct)
 
 dataset_feas$postop_d4_weight[dataset_feas$enro_animal_id == "RQ9447"] <- 195.7
+
 dataset <- left_join(dataset_feas, dataset_mri, by = "enro_animal_id") |>
   left_join(dataset_behav, by = "enro_animal_id")
+
+
+
 
 ## Data labeling ----
 
@@ -163,8 +167,8 @@ dt <- dataset %>%
                                              "Neutered Maled")),
     compliance_donor_sex = 
       case_when(
-        srg_embolic_draw_sex != enro_sex ~ "Yes",
-        srg_embolic_draw_sex == enro_sex ~ "No",
+        srg_embolic_draw_sex == enro_sex ~ "Yes",
+        srg_embolic_draw_sex != enro_sex ~ "No",
         .default = NA
       ),
     srg_actual_surg_dt = 
