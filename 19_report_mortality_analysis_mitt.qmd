@@ -85,7 +85,7 @@ nt_format(tab)|>
 ::: {.panel-tabset}
 
 
-### Overall
+### Treatment
 
 ::: {.panel-tabset}
 
@@ -97,6 +97,22 @@ plots$txas_reperfusion$overall$all_days
 #### First Week
 ```{r fig.height=7}
 plots$txas_reperfusion$overall$seven_days
+```
+
+:::
+
+### Clot Length
+
+::: {.panel-tabset}
+
+#### All days
+```{r fig.height=7}
+plots$clot_length$overall$all_days
+```
+
+#### First Week
+```{r fig.height=7}
+plots$clot_length$overall$seven_days
 ```
 
 :::

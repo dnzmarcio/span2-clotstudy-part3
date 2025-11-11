@@ -133,6 +133,40 @@ plots$txas_reperfusion$overall$seven_days <-
              break.time.by = 1
   )
 
+### Clot Length ----
+
+fit <- survfit(Surv(time, status) ~ clot_length, data = dt)
+
+# Perform the log-rank test
+surv_object <- Surv(time = dt$time, event = dt$status)
+log_rank_test <- survdiff(surv_object ~ clot_length, data = dt)
+pval.log_rank_test = log_rank_test$pvalue
+
+plots$clot_length$overall$all_days <- 
+  ggsurvplot(fit,
+             palette = colors[2:1],
+             conf.int = FALSE,
+             risk.table = TRUE,
+             legend.title = "Clot Length",
+             xlab = "Time (days)",
+             legend.labs = c("3cm", "4cm"),
+             pval = paste0("p = ",pvalue(pval.log_rank_test, prefix = c("< ", "", "")))
+  ) 
+
+plots$clot_length$overall$seven_days <- 
+  ggsurvplot(fit,
+             palette = colors[2:1],
+             conf.int = FALSE,
+             risk.table = TRUE,
+             legend.title = "Clot Length",
+             xlab = "Time (days)",
+             legend.labs = c("3cm", "4cm"),
+             pval = paste0("p = ",pvalue(pval.log_rank_test, prefix = c("< ", "", ""))),
+             xlim = c(0, 7),
+             break.time.by = 1
+  )
+
+
 
 ### CL3 ----
 
