@@ -145,7 +145,6 @@ dp <- dt |>
 
 aux <-   dp |> 
   select(time, perc_weight, txas_reperfusion) |>
-  filter(!(time == 8)) |>
   nt_profileplot(time = time, group = txas_reperfusion,
                  labels = list(perc_weight = "Change in Weight (%)",
                                txas_reperfusion = "Study Arm",
@@ -158,7 +157,7 @@ plots$overall$txas_reperfusion <- aux$perc_weight$plot + aux$perc_weight$n.table
 
 
 aux <-   dp |> 
-  filter(!(time == 8) & clot_length == 3) |>
+  filter(clot_length == 3) |>
   select(time, perc_weight, txas_reperfusion) |>
   nt_profileplot(time = time, group = txas_reperfusion,
                  labels = list(perc_weight = "Change in Weight (%)",
@@ -172,7 +171,7 @@ plots$cl3$txas_reperfusion <- aux$perc_weight$plot + aux$perc_weight$n.table +
 
 
 aux <-   dp |> 
-  filter(!(time == 8) & clot_length == 4) |>
+  filter(clot_length == 4) |>
   select(time, perc_weight, txas_reperfusion) |>
   nt_profileplot(time = time, group = txas_reperfusion,
                  labels = list(perc_weight = "Change in Weight (%)",
@@ -188,7 +187,6 @@ plots$cl4$txas_reperfusion <- aux$perc_weight$plot + aux$perc_weight$n.table +
 
 aux <-   dp |> 
   select(time, perc_weight, clot_length) |>
-  filter(!(time == 8)) |>
   nt_profileplot(time = time, group = clot_length,
                  labels = list(perc_weight = "Change in Weight (%)",
                                clot_length = "Clot Length",
