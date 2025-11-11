@@ -49,6 +49,8 @@ dt_conduct <- dataset |>
          p_mri_d2_ind = factor(p_mri_d2_ind, 
                                       levels = 0:1,
                                       labels = c("No", "Yes")),
+         across(p_mri_d2_rsn_1:p_mri_d2_rsn_9, ~ 
+                  ifelse(p_mri_d2_ind == "Yes", NA, .x)),
          p_mri_d2_rsn_1 = factor(p_mri_d2_rsn_1,
                                         levels = 0:1,
                                         labels = c("No", "Yes")),
