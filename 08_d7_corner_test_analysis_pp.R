@@ -1253,6 +1253,19 @@ plots$pim$imputation_mi$cl4 <-
 
 # Summary ----
 
+## Interaction ----
+
+tables$summary$interaction <-
+  tibble('Missing Data Strategy' =
+           c("No imputation", "Worst Score Overall",
+             "Worst Score CLS", "Worst Score CLST",
+             "Multiple Imputation"),
+         `p value` = c(tables$pim$noimputation$interaction,
+                       tables$pim$imputation_ws_overall$interaction,
+                       tables$pim$imputation_ws_cls$interaction,
+                       tables$pim$imputation_ws_clst$interaction,
+                       tables$pim$imputation_mi$interaction))
+
 ## Treatment Overall ----
 
 tmp_summary$tx$overall <- list(

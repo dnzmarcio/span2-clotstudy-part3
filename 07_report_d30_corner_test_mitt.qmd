@@ -963,6 +963,13 @@ gt(tab)
 
 ::: {.panel-tabset}
 
+#### Interaction
+
+```{r}
+tab <- tables$summary$interaction
+gt(tab) 
+```
+
 #### Overall
 
 ::: {.panel-tabset}
