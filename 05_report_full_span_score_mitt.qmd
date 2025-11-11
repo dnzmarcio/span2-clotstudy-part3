@@ -221,7 +221,7 @@ tab <- tables$outcome$clot_length$cl3
 nt_format(tab) |>
   tab_header(
     title = "Descriptive Analysis - SPAN Full Score by treatment",
-    subtitle = "Clot Legnth: 3cm"
+    subtitle = "Clot Length: 3cm"
   ) 
 ```
 
@@ -232,7 +232,7 @@ tab <- tables$outcome$clot_length$cl4
 nt_format(tab) |>
   tab_header(
     title = "Descriptive Analysis - SPAN Full Score by treatment",
-    subtitle = "Clot Legnth: 4cm"
+    subtitle = "Clot Length: 4cm"
   ) 
 ```
 :::
