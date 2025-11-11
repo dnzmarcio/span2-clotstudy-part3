@@ -34,6 +34,7 @@ dataset_behav <-
   filter(!is.na(enro_animal_id)) |>
   select(enro_animal_id, corner_d7_conduct)
 
+dataset_feas$postop_d4_weight[dataset_feas$enro_animal_id == "RQ9447"] <- 195.7
 dataset <- left_join(dataset_feas, dataset_mri, by = "enro_animal_id") |>
   left_join(dataset_behav, by = "enro_animal_id")
 
