@@ -1,5 +1,5 @@
 ---
-title: "SPAN 2 Clot Study - Day 2 Midline Shift Index"
+title: "SPAN 2 Clot Study - Day 3 Midline Shift Index"
 subtitle: "mITT Population"
 author: "Marcio Diniz, Karni Bedirian, Shu-hsiang Wang"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
@@ -33,7 +33,7 @@ tab <- tables$feasibility$overall
 
 nt_format(tab) |>
   tab_header(
-    title = "Descriptive Analysis - Day 2 MRI - Feasibility"
+    title = "Descriptive Analysis - Day 3 MRI - Feasibility"
   ) 
 ```
 
@@ -44,7 +44,7 @@ tab <- tables$feasibility$site
 
 nt_format(tab) |>
   tab_header(
-    title = "Descriptive Analysis - Day 2 MRI - Feasibility"
+    title = "Descriptive Analysis - Day 3 MRI - Feasibility"
   ) 
 
 ```
@@ -55,7 +55,7 @@ tab <- tables$feasibility$sex
 
 nt_format(tab) |>
   tab_header(
-    title = "Descriptive Analysis - Day 2 MRI - Feasibility"
+    title = "Descriptive Analysis - Day 3 MRI - Feasibility"
   ) 
 ```
 
@@ -75,7 +75,7 @@ tab <- tables$feasibility$txas_reperfusion
 
 nt_format(tab) |>
   tab_header(
-    title = "Descriptive Analysis - Day 2 MRI - Feasibility"
+    title = "Descriptive Analysis - Day 3 MRI - Feasibility"
   ) 
 ```
 

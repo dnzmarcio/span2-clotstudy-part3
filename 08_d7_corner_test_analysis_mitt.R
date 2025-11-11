@@ -561,7 +561,7 @@ plots$outcome$cl4$clot_length$d30 <-
 
 # Treatment Comparisons ----
 
-ylabel <- "Alternative Corner Index at Day 30"
+ylabel <- "Alternative Corner Index at Day 7"
 
 ## PIM - No Missing Data Imputation ----
 
@@ -628,7 +628,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$noimputation$overall$txas_reperfusion <- 
   plot_treat_sig(data = dt,
-           y = alternative_corner_index_d30, 
+           y = alternative_corner_index_d7, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
 
@@ -764,7 +764,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_overall$overall$txas_reperfusion <- 
   plot_treat_sig(data = dt,
-           y = alternative_corner_index_d30, 
+           y = alternative_corner_index_d7, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
 
@@ -901,7 +901,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_cls$overall$txas_reperfusion <- 
   plot_treat_sig(data = dt,
-           y = alternative_corner_index_d30, 
+           y = alternative_corner_index_d7, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
 
@@ -1036,7 +1036,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_ws_clst$overall$txas_reperfusion <- 
   plot_treat_sig(data = dt,
-           y = alternative_corner_index_d30, 
+           y = alternative_corner_index_d7, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
 
@@ -1181,7 +1181,7 @@ pvalue_treatment = format_pvalue(tmp.pval$pvalue)
 
 plots$pim$imputation_mi$overall$txas_reperfusion <- 
   plot_treat_sig(data = dt,
-           y = alternative_corner_index_d30, 
+           y = alternative_corner_index_d7, 
            ylabel = ylabel, 
            p_values = pvalue_treatment)
 
