@@ -32,7 +32,7 @@ library(ggprism)
 
 # Data ----
 
-mri <- "data/SPAN2EmbolicClotStud-MRIDay3DataStatsRepo_DATA_2025-10-08_1704.csv"
+mri <- "data/SPAN2EmbolicClotStud-MRIDay3DataStatsRepo_DATA_2025-12-15_1159.csv"
 feasibility <- "data/SPAN2EmbolicClotStud-ClotModelStageFeasib_DATA_2025-10-08_1704.csv"
 behavior <- "data/SPAN2EmbolicClotStud-ClotModelStageBehavi_DATA_2025-10-08_1704.csv"
 
