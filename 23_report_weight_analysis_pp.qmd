@@ -119,7 +119,7 @@ plots$cl3$txas_reperfusion
 ```{r}
 #| fig.height: 7
 #| fig-cap: "Mean \u00b1  SE"
-plots$cl3$txas_reperfusion
+plots$cl4$txas_reperfusion
 ```
 
 :::
