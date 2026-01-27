@@ -26,6 +26,14 @@ dataset_mri <-
   read_csv(file = mri) |>
   clean_names() |>
   filter(!is.na(enro_animal_id)) |>
+  select(enro_animal_id, mri_d2_conduct, p_mri_d2_fract_les_right)
+
+# Filter animal ids that have lesion farction of right < 0.01 
+tmp_ids_lesion_cutoff <- dataset_mri |>
+  filter(p_mri_d2_fract_les_right < 0.01) |>
+  select(enro_animal_id)
+
+dataset_mri <- dataset_mri |>
   select(enro_animal_id, mri_d2_conduct)
 
 dataset_behav <- 
@@ -37,7 +45,11 @@ dataset_behav <-
 dataset_feas$postop_d4_weight[dataset_feas$enro_animal_id == "RQ9447"] <- 195.7
 
 dataset <- left_join(dataset_feas, dataset_mri, by = "enro_animal_id") |>
-  left_join(dataset_behav, by = "enro_animal_id")
+  left_join(dataset_behav, by = "enro_animal_id") 
+
+# Exclude animals that have lesion farction of right < 0.01 
+dataset <- dataset |>
+  filter(!(enro_animal_id %in% tmp_ids_lesion_cutoff$enro_animal_id))
 
 
 
