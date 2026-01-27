@@ -286,7 +286,7 @@ file.rename(fname, file.path("reports", fname))
 
 source("19_mortality_analysis_pp.R")
 
-fname <- paste0("report_mortality_analysis_ft ", Sys.Date(), ".html")
+fname <- paste0("report_mortality_analysis_pp ", Sys.Date(), ".html")
 quarto_render(input = "19_report_mortality_analysis_pp.qmd", output_file = fname)  
 file.rename(fname, file.path("reports", fname))
 
